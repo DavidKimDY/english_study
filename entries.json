@@ -139,6 +139,26 @@
       "example_en": "It's 95 degrees outside and somebody's air goes out.",
       "example_ko": "밖은 95도인데 누군가의 에어컨이 고장 난다.",
       "asked_at": "2026-11-03"
+    },
+    {
+      "type": "phrase",
+      "query": "coins made",
+      "meaning": "코인을 제작했다",
+      "nuance": "여기서는 coins가 목적어이고 made가 과거분사로 뒤에서 수식하는 구조. 특별 제작된 기념 코인을 의미함.",
+      "memorization_tip": "명사 + 과거분사: 뒤에서 '~된'이라는 의미로 꾸며줄 수 있음.",
+      "example_en": "We had special momentum theorem coins made.",
+      "example_ko": "우리는 특별한 모멘텀 정리 기념 코인을 제작했어.",
+      "asked_at": "2026-11-03"
+    },
+    {
+      "type": "phrase",
+      "query": "hit their one-year anniversary",
+      "meaning": "1주년을 맞이하다",
+      "nuance": "회사 근속, 연애, 프로젝트 등 특정 기간의 1주년을 맞이할 때 캐주얼하게 사용.",
+      "memorization_tip": "hit은 특정 시점이나 목표에 도달한다는 의미로도 사용됨.",
+      "example_en": "Every team member gets one when they hit their one-year anniversary.",
+      "example_ko": "모든 팀원은 입사 1주년이 되면 하나씩 받아.",
+      "asked_at": "2026-11-03"
     }
   ]
 }

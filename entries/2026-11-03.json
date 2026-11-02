@@ -1,0 +1,64 @@
+{
+  "entries": [
+    {
+      "type": "word",
+      "query": "integration",
+      "meaning": "통합, 결합",
+      "nuance": "여러 요소를 하나로 연결해 서로 잘 작동하게 만드는 것.",
+      "memorization_tip": "여러 조각을 하나로 통합한다고 연상.",
+      "example_en": "We need better integration between the two teams.",
+      "example_ko": "두 팀 간의 더 나은 협력이 필요하다.",
+      "asked_at": "2026-11-03"
+    },
+    {
+      "type": "word",
+      "query": "integrity",
+      "meaning": "정직함, 도덕적 원칙, 온전함",
+      "nuance": "사람의 성품이 올바르고 원칙을 지키는 것. Integration과 어원은 같지만 뜻은 다름.",
+      "memorization_tip": "Integrity는 정직함, Integration은 통합이라고 구분.",
+      "example_en": "He is a man of integrity.",
+      "example_ko": "그는 정직하고 원칙을 지키는 사람이다.",
+      "asked_at": "2026-11-03"
+    },
+    {
+      "type": "phrase",
+      "query": "go out",
+      "meaning": "고장 나다, 작동이 멈추다",
+      "nuance": "전기나 기계가 작동을 멈출 때 사용. 문맥에 따라 불이 꺼지거나 정전되는 뜻도 있음.",
+      "memorization_tip": "전기나 불이 밖으로 나가듯 꺼진다고 연상.",
+      "example_en": "My air conditioner went out last night.",
+      "example_ko": "어젯밤 에어컨이 고장 났어.",
+      "asked_at": "2026-11-03"
+    },
+    {
+      "type": "sentence",
+      "query": "It's 95 degrees outside and somebody's air goes out.",
+      "meaning": "밖은 95도인데 누군가의 에어컨이 고장 난다.",
+      "nuance": "미국에서는 air를 air conditioning의 줄임말로 에어컨이라는 뜻으로 사용하기도 함. Go out은 여기서 고장 나거나 작동이 멈춘다는 의미.",
+      "memorization_tip": "somebody's air = 누군가의 에어컨, goes out = 고장 난다.",
+      "example_en": "It's 95 degrees outside and somebody's air goes out.",
+      "example_ko": "밖은 95도인데 누군가의 에어컨이 고장 난다.",
+      "asked_at": "2026-11-03"
+    },
+    {
+      "type": "phrase",
+      "query": "coins made",
+      "meaning": "코인을 제작했다",
+      "nuance": "여기서는 coins가 목적어이고 made가 과거분사로 뒤에서 수식하는 구조. 특별 제작된 기념 코인을 의미함.",
+      "memorization_tip": "명사 + 과거분사: 뒤에서 '~된'이라는 의미로 꾸며줄 수 있음.",
+      "example_en": "We had special momentum theorem coins made.",
+      "example_ko": "우리는 특별한 모멘텀 정리 기념 코인을 제작했어.",
+      "asked_at": "2026-11-03"
+    },
+    {
+      "type": "phrase",
+      "query": "hit their one-year anniversary",
+      "meaning": "1주년을 맞이하다",
+      "nuance": "회사 근속, 연애, 프로젝트 등 특정 기간의 1주년을 맞이할 때 캐주얼하게 사용.",
+      "memorization_tip": "hit은 특정 시점이나 목표에 도달한다는 의미로도 사용됨.",
+      "example_en": "Every team member gets one when they hit their one-year anniversary.",
+      "example_ko": "모든 팀원은 입사 1주년이 되면 하나씩 받아.",
+      "asked_at": "2026-11-03"
+    }
+  ]
+}
