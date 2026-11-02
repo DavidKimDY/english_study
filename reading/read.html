@@ -179,6 +179,14 @@
     margin-bottom: 1.5rem;
     border-bottom: 1px solid var(--line);
   }
+  .source {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    color: var(--accent);
+    font-weight: 600;
+    text-decoration: none;
+  }
   .tip {
     font-size: 0.9rem;
     line-height: 1.5;
@@ -517,6 +525,9 @@
     $("eyebrow").textContent = ARTICLE.eyebrow;
     $("title").textContent = ARTICLE.title;
     $("meta").innerHTML = (ARTICLE.meta || []).map(esc).join("<br>");
+    if (/^https:\/\//.test(ARTICLE.source_url || "")) {
+      $("meta").insertAdjacentHTML("beforeend", `<br><a class="source" href="${esc(ARTICLE.source_url)}" target="_blank" rel="noopener">원문 보기 ↗</a>`);
+    }
     document.title = `${ARTICLE.title} · 영어 읽기`;
     textEl.innerHTML = ARTICLE.paragraphs.map((para, p) =>
       `<p>${para.map((_, s) => `<span class="s" data-p="${p}" data-s="${s}" tabindex="0" role="button"></span>`).join(" ")}</p>`
