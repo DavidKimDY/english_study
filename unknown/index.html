@@ -3,6 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#eef3f0" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="english study" />
   <title>몰랐던 영어 · english study</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -20,7 +24,8 @@
 
     html, body {
       min-height: 100%;
-      font-family: "Sora", sans-serif;
+      font-family: "Sora", system-ui, -apple-system, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+      -webkit-text-size-adjust: 100%;
       color: var(--ink);
       -webkit-tap-highlight-color: transparent;
       background:
@@ -32,7 +37,7 @@
 
     body {
       min-height: 100dvh;
-      padding: 1.1rem 1.25rem calc(2rem + env(safe-area-inset-bottom, 0px));
+      padding: calc(0.5rem + env(safe-area-inset-top, 0px)) 1.25rem calc(2rem + env(safe-area-inset-bottom, 0px));
     }
 
     main {
@@ -42,15 +47,22 @@
     }
 
     .back {
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      padding: 0 0.5rem;
+      margin-left: -0.5rem;
+      border-radius: 0.75rem;
       font-family: "Fraunces", serif;
       font-weight: 650;
       font-size: 1.05rem;
       letter-spacing: -0.02em;
       color: inherit;
       text-decoration: none;
-      margin-bottom: 1.75rem;
+      margin-bottom: 1rem;
     }
+
+    .back:active { background: rgba(15, 110, 92, 0.12); }
 
     h1 {
       font-family: "Fraunces", serif;
@@ -76,7 +88,9 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1.1rem 1.3rem;
+      min-height: 60px;
+      padding: 0.9rem 1.3rem;
+      touch-action: manipulation;
       border-radius: 1.1rem;
       background: rgba(255, 255, 255, 0.72);
       border: 1px solid rgba(255, 255, 255, 0.85);
@@ -90,7 +104,7 @@
       transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
-    .menu:hover { transform: translateY(-2px); box-shadow: 0 16px 34px rgba(28, 36, 48, 0.1); }
+    @media (hover: hover) { .menu:hover { transform: translateY(-2px); box-shadow: 0 16px 34px rgba(28, 36, 48, 0.1); } }
     .menu:active { transform: scale(0.98); }
 
     .menu.all {
@@ -101,6 +115,17 @@
     }
 
     .menu.all .count { color: rgba(255, 255, 255, 0.8); }
+
+    .label { display: flex; align-items: center; gap: 0.5rem; }
+    .today {
+      font-size: 0.68rem;
+      font-weight: 600;
+      color: var(--accent);
+      background: rgba(15, 110, 92, 0.12);
+      padding: 0.2rem 0.5rem;
+      border-radius: 999px;
+    }
+    .dow { color: var(--muted); font-weight: 500; font-size: 0.85rem; }
 
     .count {
       font-size: 0.8rem;
@@ -147,11 +172,21 @@
           }
         }
         const dates = Object.keys(counts).sort().reverse();
+        const now = new Date();
+        const todayIso = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
+        const DOW = ["일", "월", "화", "수", "목", "금", "토"];
+        const label = (iso) => {
+          const [y, m, d] = iso.split("-").map(Number);
+          const dow = DOW[new Date(y, m - 1, d).getDay()];
+          const yearPrefix = y !== now.getFullYear() ? `${y}년 ` : "";
+          const badge = iso === todayIso ? '<span class="today">오늘</span>' : "";
+          return `<span class="label">${yearPrefix}${m}월 ${d}일 <span class="dow">(${dow})</span>${badge}</span>`;
+        };
 
         list.innerHTML =
           `<a class="menu all" href="./study.html?date=all">전체 <span class="count">${entries.length}개</span></a>` +
           dates.map((d) =>
-            `<a class="menu" href="./study.html?date=${d}">${d} <span class="count">${counts[d]}개</span></a>`
+            `<a class="menu" href="./study.html?date=${d}">${label(d)} <span class="count">${counts[d]}개</span></a>`
           ).join("");
       } catch (err) {
         list.innerHTML = '<p class="status">단어 목록을 불러오지 못했어요.<br>GitHub Pages에서 열어 주세요.</p>';

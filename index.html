@@ -3,6 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#eef3f0" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="english study" />
   <title>english study</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -20,7 +24,8 @@
 
     html, body {
       min-height: 100%;
-      font-family: "Sora", sans-serif;
+      font-family: "Sora", system-ui, -apple-system, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+      -webkit-text-size-adjust: 100%;
       color: var(--ink);
       -webkit-tap-highlight-color: transparent;
       background:
@@ -34,8 +39,8 @@
       min-height: 100dvh;
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      padding: 2rem 1.25rem calc(2rem + env(safe-area-inset-bottom, 0px));
+      padding: calc(2rem + env(safe-area-inset-top, 0px)) 1.25rem calc(2.5rem + env(safe-area-inset-bottom, 0px));
+      justify-content: flex-end;
     }
 
     main {
@@ -47,7 +52,7 @@
     h1 {
       font-family: "Fraunces", serif;
       font-weight: 650;
-      font-size: 2rem;
+      font-size: 2.2rem;
       letter-spacing: -0.02em;
       margin-bottom: 0.4rem;
     }
@@ -68,7 +73,9 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1.25rem 1.35rem;
+      min-height: 64px;
+      padding: 1rem 1.35rem;
+      touch-action: manipulation;
       border-radius: 1.1rem;
       background: rgba(255, 255, 255, 0.72);
       border: 1px solid rgba(255, 255, 255, 0.85);
@@ -81,7 +88,7 @@
       transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
-    a.menu:hover { transform: translateY(-2px); box-shadow: 0 16px 34px rgba(28, 36, 48, 0.1); }
+    @media (hover: hover) { a.menu:hover { transform: translateY(-2px); box-shadow: 0 16px 34px rgba(28, 36, 48, 0.1); } }
     a.menu:active { transform: scale(0.98); }
     a.menu .arrow { color: var(--accent); }
 
@@ -105,7 +112,7 @@
     <p class="sub">오늘은 어떤 방법으로 공부할까요?</p>
     <nav>
       <a class="menu" href="./unknown/">몰랐던 영어 <span class="arrow">→</span></a>
-      <div class="menu soon" aria-disabled="true">영어 읽기 <span class="tag">제작 예정</span></div>
+      <a class="menu" href="./reading/">영어 읽기 <span class="arrow">→</span></a>
       <div class="menu soon" aria-disabled="true">영어 외우기 <span class="tag">제작 예정</span></div>
     </nav>
   </main>
