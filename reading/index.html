@@ -1,34 +1,44 @@
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<meta name="theme-color" content="#f3f6f4" />
-<meta name="apple-mobile-web-app-capable" content="yes" />
-<meta name="mobile-web-app-capable" content="yes" />
-<title>영어 읽기</title>
-<meta name="claude:viewport-fit-sides" content="cover" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,650&family=Sora:wght@400;500;600&display=swap" rel="stylesheet" />
-<style>
-  /* Layout: one reading column; a thumb-height sheet rises from the bottom for every action. */
-  :root {
-    --paper: #f3f6f4;
-    --surface: #ffffff;
-    --ink: #1c2430;
-    --muted: #5a6778;
-    --line: rgba(28, 36, 48, 0.12);
-    --accent: #0f6e5c;
-    --on-accent: #ffffff;
-    --accent-soft: rgba(15, 110, 92, 0.12);
-    --mark: rgba(15, 110, 92, 0.22);
-    --shadow: 0 -12px 40px rgba(28, 36, 48, 0.14);
-    --font-read: "Fraunces", "Iowan Old Style", Georgia, serif;
-    --font-ui: "Sora", system-ui, -apple-system, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
-    --read-size: 19px;
-    --safe-top: env(safe-area-inset-top, 0px);
-    --safe-bottom: env(safe-area-inset-bottom, 0px);
-  }
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#f3f6f4" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="english study" />
+  <title>영어 읽기 · english study</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,650&family=Sora:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    /* Layout: one column of article cards; same tokens as the reader so both themes match. */
+    :root {
+      --paper: #f3f6f4;
+      --surface: #ffffff;
+      --ink: #1c2430;
+      --muted: #5a6778;
+      --line: rgba(28, 36, 48, 0.12);
+      --accent: #0f6e5c;
+      --on-accent: #ffffff;
+      --accent-soft: rgba(15, 110, 92, 0.12);
+      --font-read: "Fraunces", "Iowan Old Style", Georgia, serif;
+      --font-ui: "Sora", system-ui, -apple-system, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        color-scheme: dark;
+        --paper: #0f1614;
+        --surface: #18221f;
+        --ink: #e4ebe8;
+        --muted: #93a39d;
+        --line: rgba(228, 235, 232, 0.12);
+        --accent: #5cc8ae;
+        --on-accent: #0b1512;
+        --accent-soft: rgba(92, 200, 174, 0.14);
+      }
+    }
+    :root[data-theme="dark"] {
       color-scheme: dark;
       --paper: #0f1614;
       --surface: #18221f;
@@ -38,863 +48,158 @@
       --accent: #5cc8ae;
       --on-accent: #0b1512;
       --accent-soft: rgba(92, 200, 174, 0.14);
-      --mark: rgba(92, 200, 174, 0.28);
-      --shadow: 0 -12px 40px rgba(0, 0, 0, 0.5);
     }
-  }
-  :root[data-theme="dark"] {
-    color-scheme: dark;
-    --paper: #0f1614;
-    --surface: #18221f;
-    --ink: #e4ebe8;
-    --muted: #93a39d;
-    --line: rgba(228, 235, 232, 0.12);
-    --accent: #5cc8ae;
-    --on-accent: #0b1512;
-    --accent-soft: rgba(92, 200, 174, 0.14);
-    --mark: rgba(92, 200, 174, 0.28);
-    --shadow: 0 -12px 40px rgba(0, 0, 0, 0.5);
-  }
 
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  [hidden] { display: none !important; }
-
-  html { -webkit-text-size-adjust: 100%; }
-  body {
-    background: var(--paper);
-    color: var(--ink);
-    font-family: var(--font-ui);
-    font-size: 16px;
-    -webkit-tap-highlight-color: transparent;
-    padding-left: max(16px, env(safe-area-inset-left, 0px));
-    padding-right: max(16px, env(safe-area-inset-right, 0px));
-  }
-  body::before {
-    content: "";
-    position: fixed;
-    inset: 0 0 auto;
-    height: var(--safe-top);
-    z-index: 10;
-    background: var(--paper);
-  }
-  button, a { touch-action: manipulation; font: inherit; color: inherit; }
-  button { cursor: pointer; border: 0; background: none; }
-  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 6px; }
-
-  /* ---------- top bar ---------- */
-  .topbar {
-    position: sticky;
-    top: var(--safe-top);
-    z-index: 5;
-    background: var(--paper);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 640px;
-    margin: 0 auto;
-    padding-block: 0.4rem;
-  }
-  .back {
-    display: inline-flex;
-    align-items: center;
-    min-height: 44px;
-    padding: 0 0.5rem;
-    margin-left: -0.5rem;
-    border-radius: 0.75rem;
-    font-family: var(--font-read);
-    font-weight: 650;
-    font-size: 1rem;
-    text-decoration: none;
-  }
-  .back:active { background: var(--accent-soft); }
-  .top-right { display: flex; align-items: center; gap: 0.5rem; }
-  .size-btn {
-    min-width: 44px;
-    min-height: 40px;
-    padding: 0 0.7rem;
-    border-radius: 999px;
-    border: 1px solid var(--line);
-    background: var(--surface);
-    font-family: var(--font-read);
-    font-weight: 650;
-    display: inline-flex;
-    align-items: baseline;
-    gap: 0.1rem;
-  }
-  .size-btn small { font-size: 0.75rem; }
-  .size-btn span { font-size: 1.05rem; }
-  .size-btn:active { background: var(--accent-soft); }
-  .saved-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.45rem;
-    min-height: 40px;
-    padding: 0 0.9rem;
-    border-radius: 999px;
-    border: 1px solid var(--line);
-    background: var(--surface);
-    font-size: 0.88rem;
-    font-weight: 600;
-  }
-  .saved-pill b {
-    min-width: 1.4rem;
-    padding: 0.05rem 0.4rem;
-    border-radius: 999px;
-    background: var(--accent);
-    color: var(--on-accent);
-    font-size: 0.75rem;
-    text-align: center;
-    font-variant-numeric: tabular-nums;
-  }
-  .saved-pill.bump b { animation: bump 0.35s ease; }
-  @keyframes bump { 50% { transform: scale(1.3); } }
-
-  /* ---------- article ---------- */
-  article {
-    max-width: 640px;
-    margin: 0 auto;
-    padding-block: 1.25rem 45vh;
-  }
-  .eyebrow {
-    font-size: 0.72rem;
-    font-weight: 600;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--accent);
-  }
-  h1 {
-    font-family: var(--font-read);
-    font-weight: 650;
-    font-size: clamp(1.7rem, 7vw, 2.3rem);
-    line-height: 1.2;
-    letter-spacing: -0.02em;
-    text-wrap: balance;
-    margin-block: 0.4rem 0.6rem;
-  }
-  .meta {
-    font-size: 0.86rem;
-    color: var(--muted);
-    line-height: 1.55;
-    padding-bottom: 1.25rem;
-    margin-bottom: 1.5rem;
-    border-bottom: 1px solid var(--line);
-  }
-  .tip {
-    font-size: 0.9rem;
-    line-height: 1.5;
-    color: var(--muted);
-    background: var(--accent-soft);
-    padding: 0.65rem 0.85rem;
-    border-radius: 0.75rem;
-    margin-bottom: 1.5rem;
-  }
-  .text {
-    display: flex;
-    flex-direction: column;
-    gap: 1.25em;
-    font-family: var(--font-read);
-    font-size: var(--read-size);
-    line-height: 1.8;
-    user-select: none;
-    -webkit-user-select: none;
-    -webkit-touch-callout: none;
-  }
-  .s {
-    cursor: pointer;
-    border-radius: 0.35em;
-    padding: 0.12em 0.05em;
-    -webkit-box-decoration-break: clone;
-    box-decoration-break: clone;
-    transition: opacity 0.2s ease, background-color 0.2s ease;
-  }
-  .s.saved { background: linear-gradient(transparent 62%, var(--mark) 62%); }
-  .w.saved {
-    text-decoration: underline;
-    text-decoration-color: var(--accent);
-    text-decoration-thickness: 0.14em;
-    text-underline-offset: 0.2em;
-  }
-  .text.has-focus .s:not(.focused) { opacity: 0.28; }
-  .s.focused { background: var(--accent-soft); }
-
-  /* ---------- bottom sheet ---------- */
-  .sheet {
-    position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 20;
-    max-height: min(72vh, 560px);
-    display: flex;
-    flex-direction: column;
-    background: var(--surface);
-    border-radius: 1.4rem 1.4rem 0 0;
-    box-shadow: var(--shadow);
-    padding: 0.5rem max(16px, env(safe-area-inset-right, 0px)) calc(0.9rem + var(--safe-bottom)) max(16px, env(safe-area-inset-left, 0px));
-    transform: translateY(105%);
-    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-  .sheet.open { transform: none; }
-  .sheet-inner {
-    width: 100%;
-    max-width: 640px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: 0.85rem;
-    min-height: 0;
-  }
-  .grab {
-    width: 2.4rem;
-    height: 0.28rem;
-    border-radius: 999px;
-    background: var(--line);
-    margin: 0 auto 0.2rem;
-  }
-  .sheet-head {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 0.5rem;
-  }
-  .sheet-title {
-    font-size: 0.8rem;
-    font-weight: 600;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--muted);
-  }
-  .icon-btn {
-    min-width: 44px;
-    min-height: 44px;
-    border-radius: 0.8rem;
-    font-size: 1.1rem;
-    color: var(--muted);
-  }
-  .icon-btn:active { background: var(--accent-soft); }
-  .text-btn {
-    min-height: 44px;
-    padding: 0 0.6rem;
-    margin-left: -0.6rem;
-    border-radius: 0.8rem;
-    font-weight: 600;
-    font-size: 0.9rem;
-  }
-  .text-btn:active { background: var(--accent-soft); }
-
-  .actions {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.6rem;
-  }
-  .btn {
-    min-height: 56px;
-    border-radius: 1rem;
-    border: 1px solid var(--line);
-    background: var(--paper);
-    font-weight: 600;
-    font-size: 0.98rem;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.4rem;
-    padding: 0 1rem;
-  }
-  .btn.primary {
-    background: var(--accent);
-    border-color: var(--accent);
-    color: var(--on-accent);
-  }
-  .btn.wide { grid-column: 1 / -1; }
-  .btn:disabled { opacity: 0.4; cursor: default; }
-  .btn:active:not(:disabled) { transform: scale(0.97); }
-  .btn.done { background: var(--accent-soft); border-color: transparent; color: var(--accent); }
-
-  .ko {
-    font-size: 1.02rem;
-    line-height: 1.65;
-    padding: 0.8rem 0.9rem;
-    border-radius: 0.9rem;
-    background: var(--paper);
-    word-break: keep-all;
-  }
-
-  .chips {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    overflow-y: auto;
-    overscroll-behavior: contain;
-    padding: 0.1rem;
-    user-select: none;
-    -webkit-user-select: none;
-  }
-  .chip {
-    min-height: 46px;
-    padding: 0 0.95rem;
-    border-radius: 0.8rem;
-    border: 1.5px solid var(--line);
-    background: var(--paper);
-    font-family: var(--font-read);
-    font-size: calc(var(--read-size) * 0.95);
-    position: relative;
-    transition: background-color 0.12s ease, border-color 0.12s ease;
-  }
-  .chip.was-saved::after {
-    content: "";
-    position: absolute;
-    top: 6px;
-    right: 6px;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--accent);
-  }
-  .chip[aria-pressed="true"] {
-    background: var(--accent);
-    border-color: var(--accent);
-    color: var(--on-accent);
-  }
-  .chip[aria-pressed="true"].was-saved::after { background: var(--on-accent); }
-  .preview {
-    font-size: 0.9rem;
-    color: var(--muted);
-    min-height: 1.3em;
-    line-height: 1.5;
-  }
-  .preview b { color: var(--ink); font-weight: 600; }
-
-  .saved-list {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    overflow-y: auto;
-    overscroll-behavior: contain;
-    min-height: 0;
-  }
-  .saved-list li {
-    display: flex;
-    gap: 0.6rem;
-    align-items: flex-start;
-    padding-block: 0.75rem;
-    border-bottom: 1px solid var(--line);
-  }
-  .saved-list li:last-child { border-bottom: 0; }
-  .kind {
-    flex: 0 0 auto;
-    margin-top: 0.15rem;
-    font-size: 0.75rem;
-    font-weight: 600;
-    padding: 0.15rem 0.5rem;
-    border-radius: 999px;
-    background: var(--accent-soft);
-    color: var(--accent);
-  }
-  .item-body { flex: 1; min-width: 0; }
-  .item-text { font-family: var(--font-read); font-size: 1.08rem; line-height: 1.45; }
-  .item-ctx { font-size: 0.86rem; color: var(--muted); line-height: 1.45; margin-top: 0.2rem; }
-  .empty { color: var(--muted); text-align: center; padding: 1.5rem 0; line-height: 1.6; }
-  .fallback {
-    font-size: 0.8rem;
-    color: var(--muted);
-  }
-  .fallback pre {
-    margin-top: 0.4rem;
-    max-height: 30vh;
-    overflow: auto;
-    white-space: pre-wrap;
-    font-family: var(--font-ui);
-    font-size: 0.78rem;
-    color: var(--ink);
-    background: var(--paper);
-    border-radius: 0.8rem;
-    padding: 0.7rem;
-    user-select: text;
-    -webkit-user-select: text;
-  }
-
-  .toast {
-    position: fixed;
-    left: 50%;
-    bottom: calc(1.25rem + var(--safe-bottom));
-    z-index: 30;
-    transform: translate(-50%, 1rem);
-    opacity: 0;
-    pointer-events: none;
-    background: var(--ink);
-    color: var(--paper);
-    font-size: 0.85rem;
-    font-weight: 500;
-    padding: 0.7rem 1.1rem;
-    border-radius: 999px;
-    white-space: nowrap;
-    transition: opacity 0.2s ease, transform 0.2s ease;
-  }
-  .toast.show { opacity: 1; transform: translate(-50%, 0); }
-  .toast.lift { bottom: calc(var(--sheet-h, 0px) + 0.75rem); }
-
-  @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after { transition: none !important; animation: none !important; }
-  }
-</style>
-
-<header class="topbar">
-  <a class="back" href="../">← english study</a>
-  <div class="top-right">
-    <button type="button" class="size-btn" id="sizeBtn" aria-label="글자 크기 바꾸기"><small>가</small><span>가</span></button>
-    <button type="button" class="saved-pill" id="savedPill" aria-label="저장함 열기">저장함 <b id="savedCount">0</b></button>
-  </div>
-</header>
-
-<article>
-  <p class="eyebrow" id="eyebrow"></p>
-  <h1 id="title"></h1>
-  <p class="meta" id="meta"></p>
-  <p class="tip" id="tip">문장을 탭하면 그 문장만 선택돼요. 단어는 그다음에 고를 수 있어요.</p>
-  <div class="text" id="text"></div>
-</article>
-
-<div class="sheet" id="sheet" role="dialog" aria-modal="false" aria-label="선택한 문장">
-  <div class="sheet-inner" id="sheetInner"></div>
-</div>
-<div class="toast" id="toast" role="status" aria-live="polite"></div>
-
-<script>
-  /* Sample article. Later this comes from articles/<slug>/article.json */
-  const ARTICLE = {
-    id: "1961-jfk-inaugural",
-    eyebrow: "연설 · 1961년 1월 20일",
-    title: "John F. Kennedy 대통령 취임 연설",
-    meta: "워싱턴 D.C. 국회의사당 · 발췌 6문단<br>미국 연방정부 저작물이라 퍼블릭 도메인이에요.",
-    paragraphs: [
-      [
-        { en: "We observe today not a victory of party, but a celebration of freedom, symbolizing an end, as well as a beginning, signifying renewal, as well as change.",
-          ko: "오늘 우리는 한 정당의 승리가 아니라 자유의 축제를 지켜보고 있습니다. 이는 끝이자 시작을 상징하며, 변화이자 새로워짐을 뜻합니다." },
-      ],
-      [
-        { en: "Let every nation know, whether it wishes us well or ill, that we shall pay any price, bear any burden, meet any hardship, support any friend, oppose any foe, in order to assure the survival and the success of liberty.",
-          ko: "우리가 잘되기를 바라든 그렇지 않든, 모든 나라는 알아야 합니다. 우리는 자유의 생존과 성공을 지키기 위해 어떤 대가든 치르고, 어떤 짐이든 지고, 어떤 고난이든 맞서며, 어떤 친구든 돕고, 어떤 적이든 대항할 것입니다." },
-      ],
-      [
-        { en: "Now the trumpet summons us again, not as a call to bear arms, though arms we need; not as a call to battle, though embattled we are; but a call to bear the burden of a long twilight struggle, year in and year out.",
-          ko: "이제 나팔이 다시 우리를 부릅니다. 무기가 필요하긴 하지만 무기를 들라는 부름이 아니고, 포위되어 있긴 하지만 전투에 나서라는 부름도 아닙니다. 해마다 이어지는 길고 어스름한 투쟁의 짐을 지라는 부름입니다." },
-        { en: "It is a struggle against the common enemies of man: tyranny, poverty, disease, and war itself.",
-          ko: "그것은 인류 공통의 적, 곧 폭정과 가난과 질병, 그리고 전쟁 그 자체에 맞서는 투쟁입니다." },
-      ],
-      [
-        { en: "In the long history of the world, only a few generations have been granted the role of defending freedom in its hour of maximum danger.",
-          ko: "세계의 긴 역사에서, 자유가 가장 큰 위험에 처한 순간에 그것을 지키는 역할을 받은 세대는 몇 되지 않습니다." },
-        { en: "I do not shrink from this responsibility; I welcome it.",
-          ko: "저는 이 책임 앞에서 물러서지 않습니다. 오히려 기꺼이 받아들입니다." },
-      ],
-      [
-        { en: "And so, my fellow Americans: ask not what your country can do for you; ask what you can do for your country.",
-          ko: "그러니 미국 국민 여러분, 나라가 여러분을 위해 무엇을 해 줄 수 있는지 묻지 말고, 여러분이 나라를 위해 무엇을 할 수 있는지 물으십시오." },
-      ],
-      [
-        { en: "My fellow citizens of the world: ask not what America will do for you, but what together we can do for the freedom of man.",
-          ko: "세계 시민 여러분, 미국이 여러분을 위해 무엇을 해 줄지 묻지 말고, 우리가 함께 인류의 자유를 위해 무엇을 할 수 있는지 물으십시오." },
-      ],
-    ],
-  };
-
-  const STORE_KEY = "reading-saved-v1";
-  const WORD_RE = /[\p{L}\p{N}]+(?:['’\-][\p{L}\p{N}]+)*/gu;
-
-  const $ = (id) => document.getElementById(id);
-  const textEl = $("text");
-  const sheet = $("sheet");
-  const inner = $("sheetInner");
-  const toastEl = $("toast");
-
-  let saved = loadSaved();
-  let focus = null;        // { p, s }
-  let mode = null;         // "sentence" | "words" | "saved"
-  let showKo = false;
-  let picked = new Set();  // word indices in words mode
-  let clearArmed = false;
-
-  /* ---------- storage ---------- */
-  function loadSaved() {
-    try { return JSON.parse(localStorage.getItem(STORE_KEY)) || []; } catch (e) { return []; }
-  }
-  function persist() {
-    try { localStorage.setItem(STORE_KEY, JSON.stringify(saved)); } catch (e) {}
-  }
-
-  /* ---------- text model ---------- */
-  function tokenize(sentence) {
-    const parts = [];
-    let last = 0;
-    for (const m of sentence.matchAll(WORD_RE)) {
-      if (m.index > last) parts.push({ gap: sentence.slice(last, m.index) });
-      parts.push({ word: m[0] });
-      last = m.index + m[0].length;
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      min-height: 100dvh;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--font-ui);
+      font-size: 16px;
+      -webkit-tap-highlight-color: transparent;
+      padding: calc(0.5rem + env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) calc(2rem + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px));
     }
-    if (last < sentence.length) parts.push({ gap: sentence.slice(last) });
-    return parts;
-  }
-  const words = (p, s) => tokenize(ARTICLE.paragraphs[p][s].en).filter((t) => t.word).map((t) => t.word);
-  const esc = (str) => String(str).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+    a { color: inherit; text-decoration: none; touch-action: manipulation; }
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 8px; }
 
-  const sentenceSaved = (p, s) => saved.some((x) => x.kind === "sentence" && x.article === ARTICLE.id && x.p === p && x.s === s);
-  function savedWordIdx(p, s) {
-    const set = new Set();
-    saved.forEach((x) => {
-      if (x.kind === "word" && x.article === ARTICLE.id && x.p === p && x.s === s) {
-        for (let i = x.range[0]; i <= x.range[1]; i++) set.add(i);
+    main { max-width: 640px; margin: 0 auto; }
+
+    .back {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      padding: 0 0.5rem;
+      margin-left: -0.5rem;
+      border-radius: 0.75rem;
+      font-family: var(--font-read);
+      font-weight: 650;
+      font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+    .back:active { background: var(--accent-soft); }
+
+    h1 {
+      font-family: var(--font-read);
+      font-weight: 650;
+      font-size: 1.9rem;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.35rem;
+    }
+    .sub { color: var(--muted); font-size: 0.92rem; margin-bottom: 1.5rem; }
+
+    .list { display: flex; flex-direction: column; gap: 0.75rem; }
+
+    .item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+      padding: 1.1rem 1.2rem 1rem;
+      border-radius: 1.1rem;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      transition: transform 0.15s ease;
+    }
+    .item:active { transform: scale(0.98); }
+    .eyebrow {
+      font-size: 0.74rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .title {
+      font-family: var(--font-read);
+      font-weight: 650;
+      font-size: 1.22rem;
+      line-height: 1.3;
+      text-wrap: balance;
+    }
+    .summary {
+      font-family: var(--font-read);
+      font-style: italic;
+      font-size: 0.98rem;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+    .foot {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 0.3rem;
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+    .badge {
+      font-size: 0.76rem;
+      font-weight: 600;
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-variant-numeric: tabular-nums;
+    }
+    .go { color: var(--accent); font-weight: 600; }
+
+    .status { color: var(--muted); text-align: center; padding: 2rem 0; line-height: 1.6; }
+
+    @media (prefers-reduced-motion: reduce) { .item { transition: none; } }
+  </style>
+</head>
+<body>
+  <main>
+    <a class="back" href="../">← english study</a>
+    <h1>영어 읽기</h1>
+    <p class="sub">읽을 글을 고르세요.</p>
+    <div class="list" id="list">
+      <p class="status">불러오는 중…</p>
+    </div>
+  </main>
+
+  <script>
+    const list = document.getElementById("list");
+    const esc = (str) => String(str).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+
+    function savedCounts() {
+      const counts = {};
+      try {
+        (JSON.parse(localStorage.getItem("reading-saved-v1")) || []).forEach((x) => {
+          counts[x.article] = (counts[x.article] || 0) + 1;
+        });
+      } catch (e) {}
+      return counts;
+    }
+
+    async function load() {
+      try {
+        const res = await fetch("../articles/index.json", { cache: "no-store" });
+        if (!res.ok) throw new Error(res.statusText);
+        const data = await res.json();
+        const articles = Array.isArray(data.articles) ? data.articles : [];
+        if (!articles.length) {
+          list.innerHTML = '<p class="status">아직 등록된 글이 없어요.</p>';
+          return;
+        }
+        const counts = savedCounts();
+        list.innerHTML = articles.map((a) => `
+          <a class="item" href="./read.html?id=${encodeURIComponent(a.id)}">
+            <span class="eyebrow">${esc(a.eyebrow || "")}</span>
+            <span class="title">${esc(a.title)}</span>
+            ${a.summary ? `<span class="summary">“${esc(a.summary)}”</span>` : ""}
+            <span class="foot">
+              ${counts[a.id] ? `<span class="badge">저장 ${counts[a.id]}개</span>` : "<span></span>"}
+              <span class="go">읽기 →</span>
+            </span>
+          </a>`).join("");
+      } catch (err) {
+        list.innerHTML = '<p class="status">글 목록을 불러오지 못했어요.<br>GitHub Pages에서 열어 주세요.</p>';
+        console.error(err);
       }
-    });
-    return set;
-  }
-
-  /* ---------- article ---------- */
-  function renderArticle() {
-    $("eyebrow").textContent = ARTICLE.eyebrow;
-    $("title").textContent = ARTICLE.title;
-    $("meta").innerHTML = ARTICLE.meta;
-    textEl.innerHTML = ARTICLE.paragraphs.map((para, p) =>
-      `<p>${para.map((_, s) => `<span class="s" data-p="${p}" data-s="${s}" tabindex="0" role="button"></span>`).join(" ")}</p>`
-    ).join("");
-    textEl.querySelectorAll(".s").forEach(paintSentence);
-  }
-
-  function paintSentence(el) {
-    const p = +el.dataset.p, s = +el.dataset.s;
-    const marks = savedWordIdx(p, s);
-    let wi = -1;
-    el.innerHTML = tokenize(ARTICLE.paragraphs[p][s].en).map((t) => {
-      if (t.gap != null) return esc(t.gap);
-      wi += 1;
-      return marks.has(wi) ? `<span class="w saved">${esc(t.word)}</span>` : esc(t.word);
-    }).join("");
-    el.classList.toggle("saved", sentenceSaved(p, s));
-  }
-
-  const sentenceEl = (p, s) => textEl.querySelector(`.s[data-p="${p}"][data-s="${s}"]`);
-
-  textEl.addEventListener("click", (e) => {
-    const el = e.target.closest(".s");
-    if (!el) { closeSheet(); return; }
-    const p = +el.dataset.p, s = +el.dataset.s;
-    if (focus && focus.p === p && focus.s === s && mode !== "saved") { closeSheet(); return; }
-    selectSentence(p, s);
-  });
-  textEl.addEventListener("keydown", (e) => {
-    if ((e.key === "Enter" || e.key === " ") && e.target.classList.contains("s")) {
-      e.preventDefault();
-      e.target.click();
     }
-  });
-  document.querySelector("article").addEventListener("click", (e) => {
-    if (!e.target.closest(".text") && mode) closeSheet();
-  });
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") closeSheet();
-  });
 
-  function selectSentence(p, s) {
-    textEl.querySelectorAll(".s.focused").forEach((x) => x.classList.remove("focused"));
-    focus = { p, s };
-    showKo = false;
-    sentenceEl(p, s).classList.add("focused");
-    textEl.classList.add("has-focus");
-    $("tip").hidden = true;
-    openSheet("sentence");
-  }
-
-  /* ---------- sheet ---------- */
-  function openSheet(next) {
-    mode = next;
-    clearArmed = false;
-    renderSheet();
-    sheet.classList.add("open");
-    requestAnimationFrame(keepFocusVisible);
-  }
-
-  function closeSheet() {
-    mode = null;
-    focus = null;
-    picked.clear();
-    sheet.classList.remove("open");
-    textEl.classList.remove("has-focus");
-    textEl.querySelectorAll(".s.focused").forEach((x) => x.classList.remove("focused"));
-    document.documentElement.style.setProperty("--sheet-h", "0px");
-  }
-
-  function keepFocusVisible() {
-    const h = sheet.offsetHeight;
-    document.documentElement.style.setProperty("--sheet-h", h + "px");
-    if (!focus) return;
-    const rect = sentenceEl(focus.p, focus.s).getBoundingClientRect();
-    const topLimit = 64;
-    const bottomLimit = window.innerHeight - h - 16;
-    if (rect.bottom > bottomLimit || rect.top < topLimit) {
-      const target = rect.top - topLimit - Math.max(0, (bottomLimit - topLimit - rect.height) / 3);
-      window.scrollBy({ top: target, behavior: "smooth" });
-    }
-  }
-
-  function renderSheet() {
-    if (mode === "sentence") renderSentenceSheet();
-    else if (mode === "words") renderWordsSheet();
-    else if (mode === "saved") renderSavedSheet();
-  }
-
-  function renderSentenceSheet() {
-    const { p, s } = focus;
-    const isSaved = sentenceSaved(p, s);
-    const ko = ARTICLE.paragraphs[p][s].ko;
-    inner.innerHTML = `
-      <div class="grab" aria-hidden="true"></div>
-      <div class="sheet-head">
-        <span class="sheet-title">문장 선택됨</span>
-        <button type="button" class="icon-btn" id="closeBtn" aria-label="닫기">✕</button>
-      </div>
-      ${ko && showKo ? `<p class="ko">${esc(ko)}</p>` : ""}
-      <div class="actions">
-        ${ko ? `<button type="button" class="btn" id="koBtn">${showKo ? "해석 숨기기" : "해석 보기"}</button>` : ""}
-        <button type="button" class="btn ${ko ? "" : "wide"}" id="wordsBtn">단어 고르기 →</button>
-        <button type="button" class="btn wide ${isSaved ? "done" : "primary"}" id="saveSentenceBtn">
-          ${isSaved ? "✓ 저장된 문장 · 탭하면 취소" : "이 문장 저장"}
-        </button>
-      </div>`;
-    $("closeBtn").onclick = closeSheet;
-    if (ko) $("koBtn").onclick = () => { showKo = !showKo; renderSheet(); requestAnimationFrame(keepFocusVisible); };
-    $("wordsBtn").onclick = () => { picked.clear(); openSheet("words"); };
-    $("saveSentenceBtn").onclick = toggleSentence;
-  }
-
-  function toggleSentence() {
-    const { p, s } = focus;
-    if (sentenceSaved(p, s)) {
-      saved = saved.filter((x) => !(x.kind === "sentence" && x.article === ARTICLE.id && x.p === p && x.s === s));
-      toast("문장 저장을 취소했어요");
-    } else {
-      saved.push({
-        kind: "sentence", article: ARTICLE.id, p, s,
-        text: ARTICLE.paragraphs[p][s].en, savedAt: today(),
-      });
-      toast("문장을 저장했어요");
-      bumpPill();
-    }
-    persist();
-    paintSentence(sentenceEl(p, s));
-    updateCount();
-    closeSheet();
-  }
-
-  function runs(indices) {
-    const sorted = [...indices].sort((a, b) => a - b);
-    const out = [];
-    for (const i of sorted) {
-      const last = out[out.length - 1];
-      if (last && i === last[1] + 1) last[1] = i;
-      else out.push([i, i]);
-    }
-    return out;
-  }
-
-  function renderWordsSheet() {
-    const { p, s } = focus;
-    const list = words(p, s);
-    const marks = savedWordIdx(p, s);
-    inner.innerHTML = `
-      <div class="grab" aria-hidden="true"></div>
-      <div class="sheet-head">
-        <button type="button" class="text-btn" id="backBtn">← 문장으로</button>
-        <button type="button" class="icon-btn" id="closeBtn" aria-label="닫기">✕</button>
-      </div>
-      <div class="chips" id="chips">
-        ${list.map((w, i) => `<button type="button" class="chip ${marks.has(i) ? "was-saved" : ""}" data-i="${i}" aria-pressed="${picked.has(i)}">${esc(w)}</button>`).join("")}
-      </div>
-      <p class="preview" id="preview"></p>
-      <button type="button" class="btn primary" id="saveWordsBtn"></button>`;
-    $("backBtn").onclick = () => openSheet("sentence");
-    $("closeBtn").onclick = closeSheet;
-    $("chips").onclick = (e) => {
-      const c = e.target.closest(".chip");
-      if (!c) return;
-      const i = +c.dataset.i;
-      picked.has(i) ? picked.delete(i) : picked.add(i);
-      c.setAttribute("aria-pressed", String(picked.has(i)));
-      syncWordPreview(list);
-    };
-    $("saveWordsBtn").onclick = () => saveWords(list);
-    syncWordPreview(list);
-  }
-
-  function syncWordPreview(list) {
-    const groups = runs(picked);
-    const btn = $("saveWordsBtn");
-    if (!groups.length) {
-      $("preview").textContent = "모르는 단어를 탭하세요. 붙어 있는 단어는 한 표현으로 저장돼요.";
-      btn.textContent = "저장";
-      btn.disabled = true;
-      return;
-    }
-    $("preview").innerHTML = "저장될 표현 · " + groups.map(([a, b]) => `<b>${esc(list.slice(a, b + 1).join(" "))}</b>`).join(" · ");
-    btn.textContent = `${groups.length}개 저장`;
-    btn.disabled = false;
-  }
-
-  function saveWords(list) {
-    const { p, s } = focus;
-    let added = 0;
-    for (const [a, b] of runs(picked)) {
-      const exists = saved.some((x) => x.kind === "word" && x.article === ARTICLE.id && x.p === p && x.s === s && x.range[0] === a && x.range[1] === b);
-      if (exists) continue;
-      saved.push({
-        kind: "word", article: ARTICLE.id, p, s, range: [a, b],
-        text: list.slice(a, b + 1).join(" "),
-        sentence: ARTICLE.paragraphs[p][s].en, savedAt: today(),
-      });
-      added += 1;
-    }
-    persist();
-    paintSentence(sentenceEl(p, s));
-    updateCount();
-    toast(added ? `${added}개 표현을 저장했어요` : "이미 저장된 표현이에요");
-    if (added) bumpPill();
-    closeSheet();
-  }
-
-  /* ---------- saved box ---------- */
-  $("savedPill").onclick = () => {
-    if (mode === "saved") { closeSheet(); return; }
-    textEl.querySelectorAll(".s.focused").forEach((x) => x.classList.remove("focused"));
-    textEl.classList.remove("has-focus");
-    focus = null;
-    openSheet("saved");
-  };
-
-  function renderSavedSheet() {
-    const items = saved.filter((x) => x.article === ARTICLE.id);
-    inner.innerHTML = `
-      <div class="grab" aria-hidden="true"></div>
-      <div class="sheet-head">
-        <span class="sheet-title">저장함 · ${items.length}개</span>
-        <button type="button" class="icon-btn" id="closeBtn" aria-label="닫기">✕</button>
-      </div>
-      ${items.length ? `
-        <ul class="saved-list" id="savedList">
-          ${items.map((x) => `
-            <li>
-              <span class="kind">${x.kind === "word" ? "표현" : "문장"}</span>
-              <div class="item-body">
-                <div class="item-text">${esc(x.text)}</div>
-                ${x.kind === "word" ? `<div class="item-ctx">${esc(x.sentence)}</div>` : ""}
-              </div>
-              <button type="button" class="icon-btn" data-del="${saved.indexOf(x)}" aria-label="삭제">✕</button>
-            </li>`).join("")}
-        </ul>
-        <div id="fallback" class="fallback" hidden></div>
-        <div class="actions">
-          <button type="button" class="btn" id="clearBtn">${clearArmed ? "한 번 더 탭하면 삭제" : "모두 지우기"}</button>
-          <button type="button" class="btn primary" id="shareBtn">공유 · 복사</button>
-        </div>`
-      : `<p class="empty">아직 저장한 게 없어요.<br>문장을 탭해서 저장해 보세요.</p>`}`;
-    $("closeBtn").onclick = closeSheet;
-    if (!items.length) return;
-    $("savedList").onclick = (e) => {
-      const b = e.target.closest("[data-del]");
-      if (!b) return;
-      const x = saved[+b.dataset.del];
-      saved.splice(+b.dataset.del, 1);
-      persist();
-      const el = sentenceEl(x.p, x.s);
-      if (el) paintSentence(el);
-      updateCount();
-      renderSheet();
-      document.documentElement.style.setProperty("--sheet-h", sheet.offsetHeight + "px");
-    };
-    $("clearBtn").onclick = () => {
-      if (!clearArmed) { clearArmed = true; renderSheet(); return; }
-      saved = saved.filter((x) => x.article !== ARTICLE.id);
-      persist();
-      textEl.querySelectorAll(".s").forEach(paintSentence);
-      updateCount();
-      toast("저장함을 비웠어요");
-      closeSheet();
-    };
-    $("shareBtn").onclick = share;
-  }
-
-  function exportText() {
-    const items = saved.filter((x) => x.article === ARTICLE.id);
-    const lines = [`[영어 읽기] ${ARTICLE.title}`, `article: ${ARTICLE.id}`, `saved: ${today()}`, ""];
-    items.forEach((x, i) => {
-      const src = (ARTICLE.paragraphs[x.p] || [])[x.s] || {};
-      if (x.kind === "word") {
-        lines.push(`${i + 1}. 표현: ${x.text}`);
-        lines.push(`   문장: ${x.sentence}`);
-      } else {
-        lines.push(`${i + 1}. 문장: ${x.text}`);
-      }
-      if (src.ko) lines.push(`   해석: ${src.ko}`);
-    });
-    return lines.join("\n");
-  }
-
-  async function share() {
-    const text = exportText();
-    if (navigator.share) {
-      try { await navigator.share({ text }); return; }
-      catch (e) { if (e && e.name === "AbortError") return; }
-    }
-    try {
-      await navigator.clipboard.writeText(text);
-      toast("복사했어요. 카톡에 붙여 넣으세요");
-      return;
-    } catch (e) {}
-    const fb = $("fallback");
-    fb.hidden = false;
-    fb.innerHTML = `아래 내용을 길게 눌러 복사하세요.<pre>${esc(text)}</pre>`;
-    document.documentElement.style.setProperty("--sheet-h", sheet.offsetHeight + "px");
-  }
-
-  /* ---------- misc ---------- */
-  function updateCount() {
-    $("savedCount").textContent = saved.filter((x) => x.article === ARTICLE.id).length;
-  }
-  function bumpPill() {
-    const el = $("savedPill");
-    el.classList.remove("bump");
-    void el.offsetWidth;
-    el.classList.add("bump");
-  }
-  function today() {
-    const d = new Date();
-    return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
-  }
-  let toastTimer;
-  function toast(msg) {
-    toastEl.textContent = msg;
-    toastEl.classList.toggle("lift", sheet.classList.contains("open"));
-    toastEl.classList.add("show");
-    clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => toastEl.classList.remove("show"), 1800);
-  }
-
-  /* ---------- font size ---------- */
-  const SIZES = [
-    { px: 19, label: "글자 보통" },
-    { px: 21, label: "글자 크게" },
-    { px: 23, label: "글자 아주 크게" },
-  ];
-  let sizeIdx = 0;
-  try { sizeIdx = Math.min(SIZES.length - 1, Math.max(0, +localStorage.getItem("reading-size") || 0)); } catch (e) {}
-  function applySize() {
-    document.documentElement.style.setProperty("--read-size", SIZES[sizeIdx].px + "px");
-  }
-  $("sizeBtn").onclick = () => {
-    sizeIdx = (sizeIdx + 1) % SIZES.length;
-    applySize();
-    try { localStorage.setItem("reading-size", String(sizeIdx)); } catch (e) {}
-    toast(SIZES[sizeIdx].label);
-  };
-  applySize();
-
-  renderArticle();
-  updateCount();
-</script>
+    load();
+    window.addEventListener("pageshow", (e) => { if (e.persisted) load(); });
+  </script>
+</body>
+</html>

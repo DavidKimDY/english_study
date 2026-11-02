@@ -58,3 +58,39 @@
 2. 에이전트가 **먼저** 설명·예문·팁을 채팅으로 답합니다.
 3. **그다음** 같은 내용을 날짜 파일과 `entries.json`에 저장합니다.
 4. `entries.json`을 열어 복습·암기에 활용합니다.
+
+## 영어 읽기 — 기사 추가
+
+```
+articles/
+├── index.json                 ← 기사 목록 (위에 있을수록 목록 위에 보임)
+└── <id>/article.json          ← 기사 본문 (문단 → 문장 단위)
+```
+
+- `<id>`는 영문 소문자·숫자·하이픈만 사용 (예: `1961-jfk-inaugural`).
+- 문장은 미리 나눠서 넣습니다. `ko`(해석)는 있으면 넣고, 없으면 생략합니다. 해석이 없는 문장은 화면에서 「해석 보기」 버튼이 사라집니다.
+- 재사용 가능한 글(퍼블릭 도메인 등)만 넣습니다.
+
+`article.json` 형식:
+
+```json
+{
+  "id": "1961-jfk-inaugural",
+  "eyebrow": "연설 · 1961년 1월 20일",
+  "title": "John F. Kennedy 대통령 취임 연설",
+  "meta": ["출처·범위 한 줄", "라이선스 한 줄"],
+  "added_at": "2026-11-03",
+  "paragraphs": [
+    [ { "en": "First sentence.", "ko": "첫 문장 해석." }, { "en": "Second sentence." } ]
+  ]
+}
+```
+
+`index.json`에는 `{ "id", "eyebrow", "title", "summary", "added_at" }`를 추가합니다.
+
+### 폰에서 보낸 저장 목록 처리
+
+`[영어 읽기]`로 시작하는 텍스트를 받으면, 각 항목을 위의 **JSON 저장 형식**에 맞춰 `entries/<오늘>.json`과 `entries.json`에 추가합니다.
+- `표현:` → `query`, 함께 온 `문장:` → `example_en`, `해석:` → `example_ko`
+- `문장:`만 있는 항목 → `type: "sentence"`, `query`·`example_en` 모두 그 문장
+- `meaning`·`nuance`·`memorization_tip`은 문장 맥락에 맞게 작성합니다.

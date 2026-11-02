@@ -1,0 +1,6 @@
+{
+  "articles": [
+    { "id": "1961-jfk-inaugural", "eyebrow": "연설 · 1961", "title": "John F. Kennedy 대통령 취임 연설", "summary": "Ask not what your country can do for you", "added_at": "2026-11-03" },
+    { "id": "1863-gettysburg-address", "eyebrow": "연설 · 1863", "title": "Abraham Lincoln 게티즈버그 연설", "summary": "Government of the people, by the people, for the people", "added_at": "2026-11-03" }
+  ]
+}
