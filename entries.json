@@ -319,6 +319,106 @@
       "example_en": "Communication is an important competency for leaders.",
       "example_ko": "의사소통은 리더에게 중요한 역량이야.",
       "asked_at": "2026-11-03"
+    },
+    {
+      "type": "word",
+      "query": "adequately",
+      "meaning": "충분히, 적절히, 제대로",
+      "nuance": "‘완벽하게’가 아니라 ‘필요한 만큼은’이라는 뜻. 부정문(not adequately)으로 쓰이면 ‘준비·대응이 기준에 못 미친다’는 비판적 뉘앙스가 강함.",
+      "memorization_tip": "ad(~에) + equ(같은, equal) → 필요한 수준과 ‘같은’ 만큼 = 충분히.",
+      "example_en": "Right now, we are not preparing adequately for that transition.",
+      "example_ko": "지금 우리는 그 전환에 충분히 대비하고 있지 않습니다.",
+      "asked_at": "2026-11-04"
+    },
+    {
+      "type": "word",
+      "query": "underestimate",
+      "meaning": "과소평가하다",
+      "nuance": "실제 크기·능력·영향을 실제보다 작게 보는 것. 사람·위험·비용 등 다양한 대상에 씀. 반대말은 overestimate.",
+      "memorization_tip": "under(아래로) + estimate(어림하다) → 실제보다 아래로 어림 = 과소평가. Never underestimate ~ 는 자주 쓰는 경고 표현.",
+      "example_en": "Another reason people underestimate AI is that analogies to the effects of past innovations are misleading.",
+      "example_ko": "사람들이 AI를 과소평가하는 또 다른 이유는 과거 혁신의 영향에 빗댄 비유가 오해를 부르기 때문입니다.",
+      "asked_at": "2026-11-04"
+    },
+    {
+      "type": "word",
+      "query": "analogies",
+      "meaning": "비유, 유추 (analogy의 복수형)",
+      "nuance": "두 대상의 비슷한 점을 근거로 설명하거나 추론하는 것. ‘analogies to ~’는 ‘~에 빗댄 비유’. 논증에서 ‘잘못된 비유’를 지적할 때 자주 등장.",
+      "memorization_tip": "analog(아날로그, 닮은꼴) → 닮은 점을 끌어와 설명 = analogy. 발음은 [어낼러지].",
+      "example_en": "Another reason people underestimate AI is that analogies to the effects of past innovations are misleading.",
+      "example_ko": "사람들이 AI를 과소평가하는 또 다른 이유는 과거 혁신의 영향에 빗댄 비유가 오해를 부르기 때문입니다.",
+      "asked_at": "2026-11-04"
+    },
+    {
+      "type": "sentence",
+      "query": "We don’t have to adapt to it because it can adapt to us.",
+      "meaning": "AI가 우리에게 맞춰 줄 수 있기 때문에 우리가 AI에 적응할 필요가 없다.",
+      "nuance": "adapt to A를 주어와 목적어만 뒤집어 반복한 대구 문장. 과거 기술은 사람이 배워야 했지만, AI는 반대로 사람에게 맞춘다는 대비를 짧고 강하게 전달.",
+      "memorization_tip": "adapt to it ↔ adapt to us — 화살표 방향만 바뀌는 거울 구조로 기억.",
+      "example_en": "We don’t have to adapt to it because it can adapt to us.",
+      "example_ko": "AI가 우리에게 맞춰 줄 수 있기 때문에 우리가 AI에 적응할 필요가 없습니다.",
+      "asked_at": "2026-11-04"
+    },
+    {
+      "type": "sentence",
+      "query": "The people who need the most time are the ones who have the least—the accounting worker who’s replaced by a bot or the $20-an-hour worker who loses their job to a $10-an-hour robot.",
+      "meaning": "가장 많은 시간이 필요한 사람들은 시간이 가장 적은 사람들이다.",
+      "nuance": "the most ↔ the least의 역설로 시작해, 대시(—) 뒤에 구체적 인물을 예시로 붙인 구조. lose one's job to ~는 ‘~에게 일자리를 빼앗기다’. $20-an-hour처럼 하이픈으로 묶어 형용사로 쓰는 표현도 눈여겨볼 것.",
+      "memorization_tip": "most ↔ least 대비 + lose A to B(B에게 A를 잃다) 두 가지만 잡으면 문장 전체가 풀림.",
+      "example_en": "The people who need the most time are the ones who have the least—the accounting worker who’s replaced by a bot or the $20-an-hour worker who loses their job to a $10-an-hour robot.",
+      "example_ko": "가장 많은 시간이 필요한 사람들은 시간이 가장 적은 사람들입니다. 봇에게 자리를 내준 회계 직원, 혹은 시급 10달러짜리 로봇에게 일자리를 잃은 시급 20달러 노동자 같은 이들이죠.",
+      "asked_at": "2026-11-04"
+    },
+    {
+      "type": "word",
+      "query": "displaced",
+      "meaning": "(일자리·살던 곳에서) 밀려난, 쫓겨난",
+      "nuance": "원래 있던 자리에서 외부 힘에 의해 밀려난 상태. 고용 맥락에선 ‘실직한’, 난민 맥락에선 displaced people(실향민)처럼 씀. 본인 선택이 아니라는 뉘앙스가 핵심.",
+      "memorization_tip": "dis(벗어나) + place(자리) → 자리에서 벗어나게 된 = 밀려난.",
+      "example_en": "Waiting until people are already displaced or underemployed will be too late.",
+      "example_ko": "사람들이 이미 일자리를 잃거나 불완전 고용 상태가 될 때까지 기다리면 너무 늦습니다.",
+      "asked_at": "2026-11-04"
+    },
+    {
+      "type": "sentence",
+      "query": "An AI companion designed to never upset you is a big, protected greenhouse.",
+      "meaning": "절대 당신을 속상하게 하지 않도록 설계된 AI 친구는 크고 보호된 온실과 같다.",
+      "nuance": "앞서 인용한 ‘바람 맞은 나무 vs 온실 속 아이’ 비유를 AI에 그대로 적용한 은유. designed to never ~ 는 과거분사구가 companion을 꾸미는 구조. ‘온실’은 편안하지만 단련이 안 되는 환경을 뜻함.",
+      "memorization_tip": "greenhouse = 온실 속 화초. 늘 편한 AI 친구 = 온실.",
+      "example_en": "An AI companion designed to never upset you is a big, protected greenhouse.",
+      "example_ko": "절대 당신을 속상하게 하지 않도록 설계된 AI 친구는 크고 보호된 온실과 같습니다.",
+      "asked_at": "2026-11-04"
+    },
+    {
+      "type": "sentence",
+      "query": "I like the phrase Human Reserved because it makes me think of nature reserves—places where we could put buildings and roads, but we choose not to because the loss would be too great.",
+      "meaning": "‘Human Reserved’라는 표현이 좋다. 자연 보호 구역이 떠오르기 때문이다.",
+      "nuance": "reserve(남겨 두다)의 이중 의미를 활용한 말장난. nature reserve(자연 보호 구역)처럼 ‘할 수 있지만 일부러 안 하는’ 영역을 일자리에 적용. could ~ but we choose not to 구조가 ‘가능하지만 선택적으로 포기’라는 핵심을 전달.",
+      "memorization_tip": "reserved seat(예약석)처럼 ‘인간용으로 찜해 둔 자리’라고 연상.",
+      "example_en": "I like the phrase Human Reserved because it makes me think of nature reserves—places where we could put buildings and roads, but we choose not to because the loss would be too great.",
+      "example_ko": "저는 ‘Human Reserved(인간 보호 구역)’라는 표현이 좋습니다. 자연 보호 구역이 떠오르거든요. 건물과 도로를 지을 수 있지만, 잃는 것이 너무 크기 때문에 짓지 않기로 선택한 곳 말이죠.",
+      "asked_at": "2026-11-04"
+    },
+    {
+      "type": "sentence",
+      "query": "The tax system nudges you toward replacing people with machines.",
+      "meaning": "지금의 세금 제도는 사람을 기계로 대체하는 쪽으로 슬며시 등을 떠민다.",
+      "nuance": "nudge는 강제가 아니라 ‘팔꿈치로 슬쩍 찔러’ 특정 방향으로 유도하는 것. nudge A toward B(A를 B 쪽으로 유도하다), replace A with B(A를 B로 대체하다) 두 패턴이 함께 들어 있음.",
+      "memorization_tip": "nudge = 팔꿈치로 쿡. 행동경제학 책 『넛지』를 떠올리면 ‘은근한 유도’.",
+      "example_en": "The tax system nudges you toward replacing people with machines.",
+      "example_ko": "지금의 세금 제도는 사람을 기계로 대체하는 쪽으로 슬며시 등을 떠밉니다.",
+      "asked_at": "2026-11-04"
+    },
+    {
+      "type": "word",
+      "query": "unprecedented",
+      "meaning": "전례 없는",
+      "nuance": "이전에 한 번도 없었던 규모·종류라는 강조. 뉴스·연설에서 위기나 변화의 크기를 부각할 때 자주 씀. 한 문장에서 반복하면 ‘전례 없는 문제엔 전례 없는 대응’이라는 대칭 수사가 됨.",
+      "memorization_tip": "un(없는) + precedent(선례) + ed → 선례가 없는. precede(앞서다)에서 온 말.",
+      "example_en": "This unprecedented technology demands an unprecedented global response.",
+      "example_ko": "전례 없는 이 기술은 전례 없는 전 지구적 대응을 요구합니다.",
+      "asked_at": "2026-11-04"
     }
   ]
 }

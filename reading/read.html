@@ -223,6 +223,13 @@
     text-underline-offset: 0.2em;
   }
   .text.has-focus .s:not(.focused) { opacity: 0.28; }
+  .text p.h {
+    font-family: var(--font-ui, system-ui, sans-serif);
+    font-weight: 700;
+    font-size: 1.08em;
+    line-height: 1.4;
+    margin-top: 0.75em;
+  }
   .s.focused { background: var(--accent-soft); }
 
   /* ---------- bottom sheet ---------- */
@@ -530,7 +537,7 @@
     }
     document.title = `${ARTICLE.title} · 영어 읽기`;
     textEl.innerHTML = ARTICLE.paragraphs.map((para, p) =>
-      `<p>${para.map((_, s) => `<span class="s" data-p="${p}" data-s="${s}" tabindex="0" role="button"></span>`).join(" ")}</p>`
+      `<p${para[0] && para[0].h ? ' class="h"' : ""}>${para.map((_, s) => `<span class="s" data-p="${p}" data-s="${s}" tabindex="0" role="button"></span>`).join(" ")}</p>`
     ).join("");
     textEl.querySelectorAll(".s").forEach(paintSentence);
   }
