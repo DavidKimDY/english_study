@@ -465,7 +465,7 @@
   <p class="eyebrow" id="eyebrow"></p>
   <h1 id="title"></h1>
   <p class="meta" id="meta"></p>
-  <p class="tip" id="tip">문장을 탭하면 그 문장만 선택돼요. 단어는 그다음에 고를 수 있어요.</p>
+  <p class="tip" id="tip">문장을 탭하면 그 문장만 선택돼요. 한 번 더 탭하면 단어를 고를 수 있어요.</p>
   <div class="text" id="text"></div>
 </article>
 
@@ -558,9 +558,13 @@
 
   textEl.addEventListener("click", (e) => {
     const el = e.target.closest(".s");
-    if (!el) { closeSheet(); return; }
+    if (!el) return; // tap between sentences: handled by the outside-click listener
     const p = +el.dataset.p, s = +el.dataset.s;
-    if (focus && focus.p === p && focus.s === s && mode !== "saved") { closeSheet(); return; }
+    if (focus && focus.p === p && focus.s === s && mode !== "saved") {
+      // Second tap on the selected sentence goes straight to word picking.
+      if (mode === "sentence") { picked.clear(); openSheet("words"); }
+      return;
+    }
     selectSentence(p, s);
   });
   textEl.addEventListener("keydown", (e) => {
@@ -569,8 +573,12 @@
       e.target.click();
     }
   });
-  document.querySelector("article").addEventListener("click", (e) => {
-    if (!e.target.closest(".text") && mode) closeSheet();
+  // Tapping anywhere outside a sentence (and outside the sheet / top bar) clears the selection.
+  document.addEventListener("click", (e) => {
+    if (!mode) return;
+    // Sheet buttons may re-render the sheet, detaching the target before this runs.
+    if (!e.target.isConnected || e.target.closest(".s, .sheet, .topbar, .toast")) return;
+    closeSheet();
   });
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") closeSheet();
