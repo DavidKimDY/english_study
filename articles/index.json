@@ -1,6 +1,13 @@
 {
   "articles": [
     {
+      "id": "2026-critical-thinking-agents",
+      "eyebrow": "Essay · 2026",
+      "title": "Critical thinking when agents do the work",
+      "summary": "How to keep owning your judgment when so much of your work runs through AI agents.",
+      "added_at": "2026-11-05"
+    },
+    {
       "id": "2026-gates-epochal-shift",
       "eyebrow": "Gates Notes · 2026",
       "title": "An epochal shift",
