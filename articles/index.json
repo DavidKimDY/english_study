@@ -1,6 +1,13 @@
 {
   "articles": [
     {
+      "id": "2026-amodei-policy-ai-exponential",
+      "eyebrow": "Dario Amodei · 2026",
+      "title": "Policy on the AI Exponential",
+      "summary": "Policy must catch up with AI's exponential progress.",
+      "added_at": "2026-11-10"
+    },
+    {
       "id": "2026-critical-thinking-agents",
       "eyebrow": "Essay · 2026",
       "title": "Critical thinking when agents do the work",
