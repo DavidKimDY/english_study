@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#eef3f0" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="english study" />
+  <title>몰랐던 문장 · english study</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,650&family=Sora:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #1c2430;
+      --muted: #5a6778;
+      --paper: #f3f6f4;
+      --wash: #d9e6e1;
+      --accent: #0f6e5c;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      min-height: 100%;
+      font-family: "Sora", system-ui, -apple-system, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+      -webkit-text-size-adjust: 100%;
+      color: var(--ink);
+      -webkit-tap-highlight-color: transparent;
+      background:
+        radial-gradient(120% 80% at 10% -10%, #e7f1ec 0%, transparent 55%),
+        radial-gradient(90% 70% at 100% 0%, #dce8f2 0%, transparent 50%),
+        linear-gradient(165deg, #eef3f0 0%, var(--paper) 48%, var(--wash) 100%);
+      background-attachment: fixed;
+    }
+
+    body {
+      min-height: 100dvh;
+      padding: calc(0.5rem + env(safe-area-inset-top, 0px)) 1.25rem calc(2rem + env(safe-area-inset-bottom, 0px));
+    }
+
+    main {
+      width: 100%;
+      max-width: 420px;
+      margin: 0 auto;
+    }
+
+    .back {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      padding: 0 0.5rem;
+      margin-left: -0.5rem;
+      border-radius: 0.75rem;
+      font-family: "Fraunces", serif;
+      font-weight: 650;
+      font-size: 1.05rem;
+      letter-spacing: -0.02em;
+      color: inherit;
+      text-decoration: none;
+      margin-bottom: 1rem;
+    }
+
+    .back:active { background: rgba(15, 110, 92, 0.12); }
+
+    h1 {
+      font-family: "Fraunces", serif;
+      font-weight: 650;
+      font-size: 1.8rem;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.4rem;
+    }
+
+    .sub {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-bottom: 1.5rem;
+    }
+
+    nav {
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+    }
+
+    .menu {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      min-height: 60px;
+      padding: 0.9rem 1.3rem;
+      touch-action: manipulation;
+      border-radius: 1.1rem;
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 12px 30px rgba(28, 36, 48, 0.07);
+      color: inherit;
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: 600;
+      font-variant-numeric: tabular-nums;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    @media (hover: hover) { .menu:hover { transform: translateY(-2px); box-shadow: 0 16px 34px rgba(28, 36, 48, 0.1); } }
+    .menu:active { transform: scale(0.98); }
+
+    .menu.all {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+      margin-bottom: 0.6rem;
+    }
+
+    .menu.all .count { color: rgba(255, 255, 255, 0.8); }
+
+    .label { display: flex; align-items: center; gap: 0.5rem; }
+    .today {
+      font-size: 0.68rem;
+      font-weight: 600;
+      color: var(--accent);
+      background: rgba(15, 110, 92, 0.12);
+      padding: 0.2rem 0.5rem;
+      border-radius: 999px;
+    }
+    .dow { color: var(--muted); font-weight: 500; font-size: 0.85rem; }
+
+    .count {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--muted);
+    }
+
+    .status {
+      color: var(--muted);
+      font-size: 0.95rem;
+      padding: 2rem 0;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <a class="back" href="../">← english study</a>
+    <h1>몰랐던 문장</h1>
+    <p class="sub">날짜를 골라 학습하세요.</p>
+    <nav id="list">
+      <p class="status">불러오는 중…</p>
+    </nav>
+  </main>
+
+  <script>
+    const list = document.getElementById("list");
+
+    async function load() {
+      try {
+        const res = await fetch("../sentences.json", { cache: "no-store" });
+        if (!res.ok) throw new Error(res.statusText);
+        const data = await res.json();
+        const entries = Array.isArray(data.sentences) ? data.sentences : [];
+        if (!entries.length) {
+          list.innerHTML = '<p class="status">아직 등록된 문장이 없어요.</p>';
+          return;
+        }
+
+        const counts = {};
+        for (const e of entries) {
+          if (/^\d{4}-\d{2}-\d{2}$/.test(e.asked_at || "")) {
+            counts[e.asked_at] = (counts[e.asked_at] || 0) + 1;
+          }
+        }
+        const dates = Object.keys(counts).sort().reverse();
+        const now = new Date();
+        const todayIso = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
+        const DOW = ["일", "월", "화", "수", "목", "금", "토"];
+        const label = (iso) => {
+          const [y, m, d] = iso.split("-").map(Number);
+          const dow = DOW[new Date(y, m - 1, d).getDay()];
+          const yearPrefix = y !== now.getFullYear() ? `${y}년 ` : "";
+          const badge = iso === todayIso ? '<span class="today">오늘</span>' : "";
+          return `<span class="label">${yearPrefix}${m}월 ${d}일 <span class="dow">(${dow})</span>${badge}</span>`;
+        };
+
+        list.innerHTML =
+          `<a class="menu all" href="./study.html?date=all">전체 <span class="count">${entries.length}개</span></a>` +
+          dates.map((d) =>
+            `<a class="menu" href="./study.html?date=${d}">${label(d)} <span class="count">${counts[d]}개</span></a>`
+          ).join("");
+      } catch (err) {
+        list.innerHTML = '<p class="status">문장 목록을 불러오지 못했어요.<br>GitHub Pages에서 열어 주세요.</p>';
+        console.error(err);
+      }
+    }
+
+    load();
+  </script>
+</body>
+</html>

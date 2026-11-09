@@ -4,8 +4,8 @@
 
 | 프로퍼티 | 타입 | 설명 |
 |----------|------|------|
-| `type` | string | 항목 종류. `"word"` · `"phrase"` · `"sentence"` 중 하나. |
-| `query` | string | 사용자가 물어본 원문(단어·숙어·문장). 학습 카드의 앞면 역할. |
+| `type` | string | 항목 종류. `"word"` · `"phrase"` 중 하나. (문장은 `sentences.json` — README의 **몰랐던 문장** 참고) |
+| `query` | string | 사용자가 물어본 원문(단어·숙어). 학습 카드의 앞면 역할. |
 | `meaning` | string | 핵심 뜻(한국어). |
 | `nuance` | string | 뉘앙스·용법·자주 쓰이는 상황. 사전 뜻만으로 부족한 맥락. |
 | `memorization_tip` | string | 외우기 팁(연상·대비·패턴 등). |

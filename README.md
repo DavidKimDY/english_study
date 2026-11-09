@@ -24,8 +24,8 @@
 
 | 프로퍼티 | 설명 |
 |----------|------|
-| `type` | `"word"` \| `"phrase"` \| `"sentence"` |
-| `query` | 사용자가 물어본 원문 (단어/숙어/문장) |
+| `type` | `"word"` \| `"phrase"` (문장은 여기 넣지 않고 아래 **몰랐던 문장**의 `sentences.json`에 넣습니다) |
+| `query` | 사용자가 물어본 원문 (단어/숙어) |
 | `meaning` | 핵심 뜻 (한국어) |
 | `nuance` | 뉘앙스·용법 설명 |
 | `memorization_tip` | 외우기 팁 |
@@ -51,6 +51,34 @@
   ]
 }
 ```
+
+## 몰랐던 문장 — `sentences.json`
+
+예문을 따로 만들 수 없는 **문장 자체**를 모르는 경우(예전의 `type: "sentence"`, 즉 `example_en`이 `query`와 같은 항목)는 `entries.json`이 아니라 `sentences.json` 한 파일에만 넣습니다. 날짜별 파일은 없고, 웹페이지 `몰랐던 문장`이 `asked_at`으로 날짜를 나눕니다.
+
+| 프로퍼티 | 설명 |
+|----------|------|
+| `en` | 영어 문장 원문 |
+| `ko` | 자연스러운 한국어 해석 (KO 먼저 모드에서 앞면) |
+| `nuance` | 구조·표현 해설 (선택) |
+| `memorization_tip` | 외우기 팁 (선택) |
+| `asked_at` | ISO 8601 날짜 (예: `2026-11-05`) |
+
+```json
+{
+  "sentences": [
+    {
+      "en": "The challenge is monumental.",
+      "ko": "이 과제는 엄청나게 큽니다.",
+      "nuance": "monumental = 기념비처럼 거대한.",
+      "memorization_tip": "monument(기념비) + -al.",
+      "asked_at": "2026-11-05"
+    }
+  ]
+}
+```
+
+학습 화면: **EN 먼저**는 영어 문장을 보여 주고 해석을 가려 두었다가 탭하면 보여 줍니다. **KO 먼저**는 해석을 보여 주고 영어 문장을 단어마다 가려 두었다가, 탭할 때마다 한 단어씩 보여 줍니다. 해설(`nuance`·`memorization_tip`)은 두 모드 모두 마지막에 나옵니다.
 
 ## 사용 방법
 
@@ -92,5 +120,5 @@ articles/
 
 `[영어 읽기]`로 시작하는 텍스트를 받으면, 각 항목을 위의 **JSON 저장 형식**에 맞춰 `entries/<오늘>.json`과 `entries.json`에 추가합니다.
 - `표현:` → `query`, 함께 온 `문장:` → `example_en`, `해석:` → `example_ko`
-- `문장:`만 있는 항목 → `type: "sentence"`, `query`·`example_en` 모두 그 문장
 - `meaning`·`nuance`·`memorization_tip`은 문장 맥락에 맞게 작성합니다.
+- `문장:`만 있는 항목 → `sentences.json`에 추가합니다. `문장:` → `en`, `해석:` → `ko`, `nuance`·`memorization_tip`은 문장 구조·표현에 맞게 작성합니다.

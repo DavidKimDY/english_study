@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#eef3f0" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="english study" />
+  <title>몰랐던 문장 · english study</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,650&family=Sora:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #1c2430;
+      --muted: #5a6778;
+      --line: rgba(28, 36, 48, 0.1);
+      --paper: #f3f6f4;
+      --wash: #d9e6e1;
+      --accent: #0f6e5c;
+      --accent-soft: rgba(15, 110, 92, 0.12);
+      --skeleton: #d2ddd8;
+      --skeleton-shine: #e8efeb;
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    [hidden] { display: none !important; }
+
+    html, body {
+      height: 100%;
+      overflow: hidden;
+      overscroll-behavior: none;
+      font-family: "Sora", system-ui, -apple-system, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+      color: var(--ink);
+      -webkit-tap-highlight-color: transparent;
+      -webkit-text-size-adjust: 100%;
+      background:
+        radial-gradient(120% 80% at 10% -10%, #e7f1ec 0%, transparent 55%),
+        radial-gradient(90% 70% at 100% 0%, #dce8f2 0%, transparent 50%),
+        linear-gradient(165deg, #eef3f0 0%, var(--paper) 48%, var(--wash) 100%);
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      height: 100dvh;
+    }
+
+    button, a { touch-action: manipulation; }
+
+    /* ---------- top ---------- */
+    header {
+      flex: 0 0 auto;
+      padding: calc(0.5rem + var(--safe-top)) 0.75rem 0.25rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .back {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      padding: 0 0.5rem;
+      margin-left: -0.25rem;
+      font-family: "Fraunces", system-ui, sans-serif;
+      font-weight: 650;
+      font-size: 1rem;
+      letter-spacing: -0.02em;
+      color: inherit;
+      text-decoration: none;
+      white-space: nowrap;
+      border-radius: 0.75rem;
+    }
+
+    .back:active { background: var(--accent-soft); }
+
+    .mode {
+      display: inline-flex;
+      padding: 3px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.65);
+      border: 1px solid var(--line);
+      flex-shrink: 0;
+    }
+
+    .mode button {
+      font: inherit;
+      font-size: 0.8rem;
+      font-weight: 600;
+      min-height: 36px;
+      padding: 0 0.85rem;
+      border: 0;
+      border-radius: 999px;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+    }
+
+    .mode button[aria-pressed="true"] {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .progress {
+      flex: 0 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.35rem 1.25rem 0.5rem;
+    }
+
+    .bar {
+      flex: 1;
+      height: 4px;
+      border-radius: 999px;
+      background: var(--line);
+      overflow: hidden;
+    }
+
+    .bar > span {
+      display: block;
+      height: 100%;
+      width: 0;
+      background: var(--accent);
+      border-radius: inherit;
+      transition: width 0.3s ease;
+    }
+
+    .counter {
+      font-size: 0.78rem;
+      color: var(--muted);
+      font-weight: 500;
+      font-variant-numeric: tabular-nums;
+      min-width: 3.2rem;
+      text-align: right;
+    }
+
+    /* ---------- card ---------- */
+    main {
+      flex: 1;
+      min-height: 0;
+      display: flex;
+      padding: 0.25rem 1rem 0.75rem;
+    }
+
+    .deck {
+      width: 100%;
+      max-width: 480px;
+      margin: 0 auto;
+      display: flex;
+      min-height: 0;
+    }
+
+    .card {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      padding: 1.5rem 1.35rem;
+      border-radius: 1.5rem;
+      background: rgba(255, 255, 255, 0.78);
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 18px 40px rgba(28, 36, 48, 0.08);
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      -webkit-overflow-scrolling: touch;
+      touch-action: pan-y;
+      transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.28s ease;
+      user-select: none;
+      -webkit-user-select: none;
+      -webkit-touch-callout: none;
+      outline: none;
+      cursor: pointer;
+    }
+
+    .card.dragging { transition: none; }
+    .card.exit-left { transform: translateX(-28%) rotate(-3deg); opacity: 0; }
+    .card.exit-right { transform: translateX(28%) rotate(3deg); opacity: 0; }
+    .card.enter { animation: enter-card 0.38s cubic-bezier(0.22, 1, 0.36, 1) both; }
+
+    @keyframes enter-card {
+      from { opacity: 0; transform: translateY(18px) scale(0.98); }
+      to { opacity: 1; transform: none; }
+    }
+
+    .type-chip {
+      align-self: flex-start;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: var(--accent-soft);
+      padding: 0.25rem 0.6rem;
+      border-radius: 999px;
+    }
+
+    .query {
+      font-family: "Fraunces", system-ui, -apple-system, "Apple SD Gothic Neo", sans-serif;
+      font-weight: 650;
+      font-size: clamp(1.6rem, 7vw, 2.1rem);
+      line-height: 1.25;
+      letter-spacing: -0.03em;
+      word-break: keep-all;
+      overflow-wrap: anywhere;
+    }
+
+    .slots {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .slot-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.35rem;
+      opacity: 0;
+      transition: opacity 0.28s ease;
+    }
+
+    .skeleton {
+      height: 3.1rem;
+      border-radius: 0.75rem;
+      background: linear-gradient(100deg, var(--skeleton) 30%, var(--skeleton-shine) 50%, var(--skeleton) 70%);
+      background-size: 200% 100%;
+      animation: shimmer 1.6s ease-in-out infinite;
+    }
+
+    .skeleton.tall { height: 4.4rem; }
+
+    @keyframes shimmer {
+      0% { background-position: 100% 0; }
+      100% { background-position: -100% 0; }
+    }
+
+    .slot-body {
+      display: none;
+      font-size: 1.05rem;
+      line-height: 1.6;
+      word-break: keep-all;
+      overflow-wrap: anywhere;
+    }
+
+    .slot.revealed .slot-label { opacity: 1; }
+    .slot.revealed .skeleton { display: none; }
+    .slot.revealed .slot-body {
+      display: block;
+      animation: reveal 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    @keyframes reveal {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: none; }
+    }
+
+    .status {
+      align-self: center;
+      width: 100%;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.6;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    /* ---------- finish ---------- */
+    .finish {
+      width: 100%;
+      align-self: center;
+      text-align: center;
+      padding: 2rem 1.5rem;
+    }
+
+    .finish h2 {
+      font-family: "Fraunces", system-ui, sans-serif;
+      font-size: 1.6rem;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+    }
+
+    .finish p { color: var(--muted); margin-bottom: 1.5rem; }
+
+    /* ---------- bottom controls ---------- */
+    .controls {
+      flex: 0 0 auto;
+      display: flex;
+      gap: 0.6rem;
+      width: 100%;
+      max-width: 512px;
+      margin: 0 auto;
+      padding: 0 1rem calc(0.75rem + var(--safe-bottom));
+    }
+
+    .controls button, .finish button, .finish a {
+      font: inherit;
+      min-height: 56px;
+      border-radius: 1.1rem;
+      border: 1px solid var(--line);
+      cursor: pointer;
+    }
+
+    .nav-btn {
+      flex: 0 0 56px;
+      background: rgba(255, 255, 255, 0.75);
+      color: var(--ink);
+      font-size: 1.3rem !important;
+    }
+
+    .nav-btn:disabled { opacity: 0.35; cursor: default; }
+
+    .primary {
+      flex: 1;
+      background: var(--accent);
+      border-color: var(--accent) !important;
+      color: #fff;
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 0 1rem;
+    }
+
+    .controls button:active:not(:disabled),
+    .finish button:active, .finish a:active { transform: scale(0.97); }
+
+    .finish .row { display: flex; flex-direction: column; gap: 0.6rem; }
+    .finish a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.75);
+      color: var(--ink);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .swipe-tip {
+      text-align: center;
+      font-size: 0.72rem;
+      color: var(--muted);
+      padding-bottom: 0.4rem;
+    }
+
+    /* ---------- sentence card ---------- */
+    .front {
+      font-size: clamp(1.25rem, 5.4vw, 1.55rem);
+      font-weight: 600;
+      line-height: 1.5;
+      letter-spacing: -0.01em;
+      word-break: keep-all;
+      overflow-wrap: anywhere;
+    }
+
+    .front.en {
+      font-family: "Fraunces", system-ui, -apple-system, serif;
+      font-weight: 500;
+      letter-spacing: -0.015em;
+    }
+
+    /* Korean-first: the English sentence, one skeleton per word */
+    .words {
+      font-family: "Fraunces", system-ui, -apple-system, serif;
+      font-size: 1.2rem;
+      line-height: 2;
+      overflow-wrap: anywhere;
+    }
+
+    .words .w {
+      border-radius: 0.4rem;
+      padding: 0.1rem 0.15rem;
+      transition: color 0.25s ease, background-color 0.25s ease;
+      -webkit-box-decoration-break: clone;
+      box-decoration-break: clone;
+    }
+
+    .words .w.hidden {
+      color: transparent;
+      background: var(--skeleton);
+    }
+
+    .words .w.next {
+      background: linear-gradient(100deg, var(--skeleton) 30%, var(--skeleton-shine) 50%, var(--skeleton) 70%);
+      background-size: 200% 100%;
+      animation: shimmer 1.6s ease-in-out infinite;
+      box-shadow: inset 0 -3px 0 var(--accent);
+    }
+
+    .words .w.just {
+      background: var(--accent-soft);
+      animation: none;
+    }
+
+    .reveal-all {
+      align-self: flex-start;
+      font: inherit;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--accent);
+      background: none;
+      border: 0;
+      min-height: 36px;
+      padding: 0 0.25rem;
+      cursor: pointer;
+    }
+
+    .note {
+      font-size: 0.95rem;
+      line-height: 1.65;
+      color: var(--ink);
+    }
+
+    .note p + p { margin-top: 0.6rem; }
+    .note b { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <header>
+    <a class="back" href="./" id="back">← 몰랐던 문장</a>
+    <div class="mode" role="group" aria-label="먼저 보일 언어">
+      <button type="button" data-mode="en" aria-pressed="true">EN 먼저</button>
+      <button type="button" data-mode="ko" aria-pressed="false">KO 먼저</button>
+    </div>
+  </header>
+
+  <div class="progress">
+    <div class="bar"><span id="bar"></span></div>
+    <div class="counter" id="counter">– / –</div>
+  </div>
+
+  <main>
+    <div class="deck" id="deck">
+      <p class="status">불러오는 중…</p>
+    </div>
+  </main>
+
+  <p class="swipe-tip" id="swipeTip">카드를 탭하거나 좌우로 밀어 보세요</p>
+  <div class="controls" id="controls">
+    <button type="button" class="nav-btn" id="prevBtn" aria-label="이전 문장">‹</button>
+    <button type="button" class="primary" id="primaryBtn">다음 보기</button>
+    <button type="button" class="nav-btn" id="nextBtn" aria-label="다음 문장">›</button>
+  </div>
+
+  <script>
+    // EN 먼저: English sentence shown, Korean behind a skeleton (one tap).
+    // KO 먼저: Korean shown, English hidden word by word — each tap uncovers one word,
+    //          so you can test whether you can produce the sentence yourself.
+    // In both modes the nuance/tip note comes last, if the sentence has one.
+
+    let items = [];
+    let index = 0;
+    let shown = 0;        // reveal steps taken on the current card
+    let finished = false;
+    let mode = "en";
+    try { if (localStorage.getItem("sentences-mode") === "ko") mode = "ko"; } catch (e) {}
+
+    const deck = document.getElementById("deck");
+    const counter = document.getElementById("counter");
+    const bar = document.getElementById("bar");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const primaryBtn = document.getElementById("primaryBtn");
+    const controls = document.getElementById("controls");
+    const swipeTip = document.getElementById("swipeTip");
+
+    try { if (localStorage.getItem("sentences-swiped")) swipeTip.hidden = true; } catch (e) {}
+
+    /* ---------- helpers ---------- */
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+
+    // Split into words, keeping the original spacing; an em dash glued to two words splits them.
+    function tokenize(text) {
+      const parts = [];
+      let last = 0;
+      for (const m of text.matchAll(/[^\s—]+—?|—/g)) {
+        parts.push({ gap: text.slice(last, m.index), word: m[0] });
+        last = m.index + m[0].length;
+      }
+      return { parts, tail: text.slice(last) };
+    }
+
+    const current = () => items[index];
+    const hasNote = (it) => Boolean((it.nuance || "").trim() || (it.memorization_tip || "").trim());
+    const wordCount = (it) => tokenize(it.en).parts.length;
+
+    // Number of reveal steps for a card in the current mode.
+    function totalSteps(it = current()) {
+      const main = mode === "ko" ? wordCount(it) : 1;
+      return main + (hasNote(it) ? 1 : 0);
+    }
+
+    /* ---------- mode ---------- */
+    function syncModeButtons() {
+      document.querySelectorAll(".mode button").forEach((b) => {
+        b.setAttribute("aria-pressed", String(b.dataset.mode === mode));
+      });
+    }
+
+    function setMode(next) {
+      if (next !== "en" && next !== "ko" || next === mode) return;
+      mode = next;
+      try { localStorage.setItem("sentences-mode", mode); } catch (e) {}
+      syncModeButtons();
+      if (items.length && !finished) {
+        shown = 0;
+        renderCard({ animate: true });
+      }
+    }
+
+    document.querySelectorAll(".mode button").forEach((b) => {
+      b.addEventListener("click", () => setMode(b.dataset.mode));
+    });
+    syncModeButtons();
+
+    /* ---------- load ---------- */
+    async function load() {
+      const date = new URLSearchParams(location.search).get("date");
+      const isDate = /^\d{4}-\d{2}-\d{2}$/.test(date || "");
+      document.getElementById("back").textContent = "← " + (isDate ? formatDate(date) : "전체");
+      try {
+        const res = await fetch("../sentences.json", { cache: "no-store" });
+        if (!res.ok) throw new Error(res.statusText);
+        const data = await res.json();
+        const all = Array.isArray(data.sentences) ? data.sentences : [];
+        items = (isDate ? all.filter((s) => s.asked_at === date) : all).filter((s) => s.en);
+        if (!items.length) {
+          showStatus("이 날짜에는 문장이 없어요.");
+          return;
+        }
+        renderCard({ animate: true });
+      } catch (err) {
+        showStatus("문장 파일을 불러오지 못했어요.<br>GitHub Pages에서 열어 주세요.");
+        console.error(err);
+      }
+    }
+
+    function formatDate(iso) {
+      const [, m, d] = iso.split("-").map(Number);
+      return `${m}월 ${d}일`;
+    }
+
+    function showStatus(html) {
+      deck.innerHTML = `<p class="status">${html}</p>`;
+      controls.hidden = true;
+      swipeTip.hidden = true;
+    }
+
+    /* ---------- render ---------- */
+    function noteHtml(it) {
+      const rows = [];
+      if ((it.nuance || "").trim()) rows.push(`<p>${escapeHtml(it.nuance)}</p>`);
+      if ((it.memorization_tip || "").trim()) rows.push(`<p><b>tip</b> ${escapeHtml(it.memorization_tip)}</p>`);
+      return `
+        <div class="slot" data-slot="note">
+          <div class="slot-label">해설</div>
+          <div class="skeleton" aria-hidden="true"></div>
+          <div class="slot-body note">${rows.join("")}</div>
+        </div>`;
+    }
+
+    function renderCard({ animate = false, exitDir = null } = {}) {
+      finished = false;
+      controls.hidden = false;
+      const it = current();
+
+      const build = () => {
+        let body;
+        if (mode === "ko") {
+          const { parts, tail } = tokenize(it.en);
+          const words = parts.map((p, i) => `${escapeHtml(p.gap)}<span class="w" data-i="${i}">${escapeHtml(p.word)}</span>`).join("") + escapeHtml(tail);
+          body = `
+            <p class="front">${escapeHtml(it.ko || "")}</p>
+            <div class="slot revealed">
+              <div class="slot-label">english</div>
+              <p class="words" lang="en" aria-label="영어 문장, 단어별로 가려짐">${words}</p>
+            </div>
+            <button type="button" class="reveal-all" id="revealAll">문장 전체 보기</button>`;
+        } else {
+          body = `
+            <p class="front en" lang="en">${escapeHtml(it.en)}</p>
+            <div class="slot" data-slot="ko">
+              <div class="slot-label">해석</div>
+              <div class="skeleton tall" aria-hidden="true"></div>
+              <div class="slot-body">${escapeHtml(it.ko || "")}</div>
+            </div>`;
+        }
+
+        deck.innerHTML = `
+          <article class="card ${animate ? "enter" : ""}" id="card" aria-live="polite">
+            <div class="type-chip">sentence</div>
+            ${body}
+            ${hasNote(it) ? noteHtml(it) : ""}
+          </article>`;
+
+        const card = document.getElementById("card");
+        bindCard(card);
+        const all = document.getElementById("revealAll");
+        if (all) all.addEventListener("click", (e) => { e.stopPropagation(); revealAllWords(); });
+        sync(false);
+      };
+
+      const old = document.getElementById("card");
+      if (exitDir && old) {
+        old.classList.add(exitDir === "left" ? "exit-left" : "exit-right");
+        setTimeout(build, 200);
+        return;
+      }
+      build();
+    }
+
+    // Apply `shown` to the current card's DOM (no re-render, so animations stay smooth).
+    function sync(scroll = true) {
+      const it = current();
+      const card = document.getElementById("card");
+      if (!card) return;
+      let main = 1;
+      let scrollTarget = null;
+
+      if (mode === "ko") {
+        const ws = card.querySelectorAll(".words .w");
+        main = ws.length;
+        ws.forEach((w, i) => {
+          w.classList.toggle("hidden", i >= shown);
+          w.classList.toggle("next", i === shown);
+          w.classList.toggle("just", i === shown - 1);
+        });
+        if (shown > 0 && shown <= main) scrollTarget = ws[shown - 1];
+        const all = document.getElementById("revealAll");
+        if (all) all.hidden = shown >= main;
+      } else {
+        const ko = card.querySelector('[data-slot="ko"]');
+        if (ko) {
+          const was = ko.classList.contains("revealed");
+          ko.classList.toggle("revealed", shown >= 1);
+          if (!was && shown >= 1) scrollTarget = ko;
+        }
+      }
+
+      const note = card.querySelector('[data-slot="note"]');
+      if (note) {
+        const was = note.classList.contains("revealed");
+        note.classList.toggle("revealed", shown > main);
+        if (!was && shown > main) scrollTarget = note;
+      }
+
+      if (scroll && scrollTarget) scrollTarget.scrollIntoView({ block: "nearest", behavior: "smooth" });
+      syncControls(main, hasNote(it));
+    }
+
+    function syncControls(main, note) {
+      const total = main + (note ? 1 : 0);
+      const done = shown >= total;
+      counter.textContent = `${index + 1} / ${items.length}`;
+      bar.style.width = `${((index + (done ? 1 : 0)) / items.length) * 100}%`;
+      prevBtn.disabled = index === 0;
+      nextBtn.disabled = index >= items.length - 1;
+
+      let label;
+      if (shown < main) label = mode === "ko" ? `다음 단어 · ${shown} / ${main}` : "해석 보기";
+      else if (!done) label = "해설 보기";
+      else label = index < items.length - 1 ? "다음 문장 →" : "완료";
+      primaryBtn.textContent = label;
+    }
+
+    function renderFinish() {
+      finished = true;
+      controls.hidden = true;
+      counter.textContent = `${items.length} / ${items.length}`;
+      bar.style.width = "100%";
+      deck.innerHTML = `
+        <div class="finish card enter">
+          <h2>다 봤어요 🎉</h2>
+          <p>${items.length}개 문장을 모두 학습했어요.</p>
+          <div class="row">
+            <button type="button" class="primary" id="restartBtn">처음부터 다시</button>
+            <a href="./">다른 날짜 고르기</a>
+          </div>
+        </div>`;
+      document.getElementById("restartBtn").addEventListener("click", () => {
+        index = 0;
+        shown = 0;
+        renderCard({ animate: true });
+      });
+    }
+
+    /* ---------- actions ---------- */
+    function revealNext() {
+      if (shown >= totalSteps()) return false;
+      shown += 1;
+      sync();
+      return true;
+    }
+
+    function revealAllWords() {
+      if (mode !== "ko") return;
+      shown = Math.max(shown, wordCount(current()));
+      sync();
+    }
+
+    function go(delta) {
+      const next = index + delta;
+      if (next < 0) return bounce();
+      if (next >= items.length) return renderFinish();
+      index = next;
+      shown = 0;
+      renderCard({ animate: true, exitDir: delta > 0 ? "left" : "right" });
+    }
+
+    function bounce() {
+      const card = document.getElementById("card");
+      if (card) {
+        card.classList.remove("dragging");
+        card.style.transform = "";
+      }
+    }
+
+    primaryBtn.addEventListener("click", () => {
+      if (!revealNext()) go(1);
+    });
+    prevBtn.addEventListener("click", () => go(-1));
+    nextBtn.addEventListener("click", () => go(1));
+
+    document.addEventListener("keydown", (e) => {
+      if (finished || !items.length) return;
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        if (!revealNext()) go(1);
+      } else if (e.key === "ArrowLeft") {
+        go(-1);
+      } else if (e.key === "ArrowRight") {
+        go(1);
+      }
+    });
+
+    /* ---------- gestures ---------- */
+    function bindCard(card) {
+      let startX = null, startY = null, axis = null, didSwipe = false;
+
+      card.addEventListener("click", () => {
+        if (didSwipe) { didSwipe = false; return; }
+        revealNext();
+      });
+
+      const down = (x, y) => { startX = x; startY = y; axis = null; didSwipe = false; };
+
+      const move = (x, y, e) => {
+        if (startX == null) return;
+        const dx = x - startX, dy = y - startY;
+        if (!axis && (Math.abs(dx) > 8 || Math.abs(dy) > 8)) {
+          axis = Math.abs(dx) > Math.abs(dy) ? "x" : "y";
+          if (axis === "x") card.classList.add("dragging");
+        }
+        if (axis !== "x") return;
+        if (e && e.cancelable) e.preventDefault();
+        didSwipe = true;
+        card.style.transform = `translateX(${dx}px) rotate(${dx * 0.03}deg)`;
+      };
+
+      const up = (x) => {
+        if (startX == null) return;
+        const dx = x - startX;
+        const wasX = axis === "x";
+        startX = null; axis = null;
+        card.classList.remove("dragging");
+        if (!wasX) return;
+        if (Math.abs(dx) >= 72) {
+          try { localStorage.setItem("sentences-swiped", "1"); } catch (e) {}
+          swipeTip.hidden = true;
+          go(dx < 0 ? 1 : -1);
+        } else {
+          card.style.transform = "";
+        }
+      };
+
+      card.addEventListener("touchstart", (e) => down(e.touches[0].clientX, e.touches[0].clientY), { passive: true });
+      card.addEventListener("touchmove", (e) => move(e.touches[0].clientX, e.touches[0].clientY, e), { passive: false });
+      card.addEventListener("touchend", (e) => up(e.changedTouches[0].clientX));
+      card.addEventListener("touchcancel", () => { startX = null; axis = null; bounce(); });
+
+      card.addEventListener("pointerdown", (e) => {
+        // Capturing would retarget clicks away from buttons inside the card.
+        if (e.pointerType === "touch" || e.target.closest("button")) return;
+        down(e.clientX, e.clientY);
+        card.setPointerCapture(e.pointerId);
+      });
+      card.addEventListener("pointermove", (e) => { if (e.pointerType !== "touch") move(e.clientX, e.clientY); });
+      card.addEventListener("pointerup", (e) => { if (e.pointerType !== "touch") up(e.clientX); });
+    }
+
+    load();
+  </script>
+</body>
+</html>

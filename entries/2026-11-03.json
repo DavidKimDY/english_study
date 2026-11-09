@@ -31,16 +31,6 @@
       "asked_at": "2026-11-03"
     },
     {
-      "type": "sentence",
-      "query": "It's 95 degrees outside and somebody's air goes out.",
-      "meaning": "밖은 95도인데 누군가의 에어컨이 고장 난다.",
-      "nuance": "미국에서는 air를 air conditioning의 줄임말로 에어컨이라는 뜻으로 사용하기도 함. Go out은 여기서 고장 나거나 작동이 멈춘다는 의미.",
-      "memorization_tip": "somebody's air = 누군가의 에어컨, goes out = 고장 난다.",
-      "example_en": "It's 95 degrees outside and somebody's air goes out.",
-      "example_ko": "밖은 95도인데 누군가의 에어컨이 고장 난다.",
-      "asked_at": "2026-11-03"
-    },
-    {
       "type": "phrase",
       "query": "coins made",
       "meaning": "코인을 제작했다",
@@ -98,16 +88,6 @@
       "memorization_tip": "Rally = 사람들을 모으고 결집시키다.",
       "example_en": "We need to keep rallying the troops.",
       "example_ko": "우리는 계속 팀원들을 독려해야 해.",
-      "asked_at": "2026-11-03"
-    },
-    {
-      "type": "sentence",
-      "query": "The best way is through the stories of the company's struggles and successes.",
-      "meaning": "가장 좋은 방법은 회사가 겪었던 어려움과 성공의 이야기를 통해서야.",
-      "nuance": "회사 문화나 가치를 전달할 때 실제로 겪은 실패와 성공의 이야기를 활용하는 것이 효과적이라는 의미.",
-      "memorization_tip": "Through = ~을 통해서, struggles = 어려움, successes = 성공 경험.",
-      "example_en": "The best way is through the stories of the company's struggles and successes.",
-      "example_ko": "가장 좋은 방법은 회사가 겪었던 어려움과 성공의 이야기를 통해서야.",
       "asked_at": "2026-11-03"
     },
     {

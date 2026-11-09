@@ -1,0 +1,81 @@
+{
+  "sentences": [
+    {
+      "en": "It's 95 degrees outside and somebody's air goes out.",
+      "ko": "밖은 95도인데 누군가의 에어컨이 고장 난다.",
+      "nuance": "미국에서는 air를 air conditioning의 줄임말로 에어컨이라는 뜻으로 사용하기도 함. Go out은 여기서 고장 나거나 작동이 멈춘다는 의미.",
+      "memorization_tip": "somebody's air = 누군가의 에어컨, goes out = 고장 난다.",
+      "asked_at": "2026-11-03"
+    },
+    {
+      "en": "The best way is through the stories of the company's struggles and successes.",
+      "ko": "가장 좋은 방법은 회사가 겪었던 어려움과 성공의 이야기를 통해서야.",
+      "nuance": "회사 문화나 가치를 전달할 때 실제로 겪은 실패와 성공의 이야기를 활용하는 것이 효과적이라는 의미.",
+      "memorization_tip": "Through = ~을 통해서, struggles = 어려움, successes = 성공 경험.",
+      "asked_at": "2026-11-03"
+    },
+    {
+      "en": "We don’t have to adapt to it because it can adapt to us.",
+      "ko": "AI가 우리에게 맞춰 줄 수 있기 때문에 우리가 AI에 적응할 필요가 없습니다.",
+      "nuance": "adapt to A를 주어와 목적어만 뒤집어 반복한 대구 문장. 과거 기술은 사람이 배워야 했지만, AI는 반대로 사람에게 맞춘다는 대비를 짧고 강하게 전달.",
+      "memorization_tip": "adapt to it ↔ adapt to us — 화살표 방향만 바뀌는 거울 구조로 기억.",
+      "asked_at": "2026-11-04"
+    },
+    {
+      "en": "The people who need the most time are the ones who have the least—the accounting worker who’s replaced by a bot or the $20-an-hour worker who loses their job to a $10-an-hour robot.",
+      "ko": "가장 많은 시간이 필요한 사람들은 시간이 가장 적은 사람들입니다. 봇에게 자리를 내준 회계 직원, 혹은 시급 10달러짜리 로봇에게 일자리를 잃은 시급 20달러 노동자 같은 이들이죠.",
+      "nuance": "the most ↔ the least의 역설로 시작해, 대시(—) 뒤에 구체적 인물을 예시로 붙인 구조. lose one's job to ~는 ‘~에게 일자리를 빼앗기다’. $20-an-hour처럼 하이픈으로 묶어 형용사로 쓰는 표현도 눈여겨볼 것.",
+      "memorization_tip": "most ↔ least 대비 + lose A to B(B에게 A를 잃다) 두 가지만 잡으면 문장 전체가 풀림.",
+      "asked_at": "2026-11-04"
+    },
+    {
+      "en": "An AI companion designed to never upset you is a big, protected greenhouse.",
+      "ko": "절대 당신을 속상하게 하지 않도록 설계된 AI 친구는 크고 보호된 온실과 같습니다.",
+      "nuance": "앞서 인용한 ‘바람 맞은 나무 vs 온실 속 아이’ 비유를 AI에 그대로 적용한 은유. designed to never ~ 는 과거분사구가 companion을 꾸미는 구조. ‘온실’은 편안하지만 단련이 안 되는 환경을 뜻함.",
+      "memorization_tip": "greenhouse = 온실 속 화초. 늘 편한 AI 친구 = 온실.",
+      "asked_at": "2026-11-04"
+    },
+    {
+      "en": "I like the phrase Human Reserved because it makes me think of nature reserves—places where we could put buildings and roads, but we choose not to because the loss would be too great.",
+      "ko": "저는 ‘Human Reserved(인간 보호 구역)’라는 표현이 좋습니다. 자연 보호 구역이 떠오르거든요. 건물과 도로를 지을 수 있지만, 잃는 것이 너무 크기 때문에 짓지 않기로 선택한 곳 말이죠.",
+      "nuance": "reserve(남겨 두다)의 이중 의미를 활용한 말장난. nature reserve(자연 보호 구역)처럼 ‘할 수 있지만 일부러 안 하는’ 영역을 일자리에 적용. could ~ but we choose not to 구조가 ‘가능하지만 선택적으로 포기’라는 핵심을 전달.",
+      "memorization_tip": "reserved seat(예약석)처럼 ‘인간용으로 찜해 둔 자리’라고 연상.",
+      "asked_at": "2026-11-04"
+    },
+    {
+      "en": "The tax system nudges you toward replacing people with machines.",
+      "ko": "지금의 세금 제도는 사람을 기계로 대체하는 쪽으로 슬며시 등을 떠밉니다.",
+      "nuance": "nudge는 강제가 아니라 ‘팔꿈치로 슬쩍 찔러’ 특정 방향으로 유도하는 것. nudge A toward B(A를 B 쪽으로 유도하다), replace A with B(A를 B로 대체하다) 두 패턴이 함께 들어 있음.",
+      "memorization_tip": "nudge = 팔꿈치로 쿡. 행동경제학 책 『넛지』를 떠올리면 ‘은근한 유도’.",
+      "asked_at": "2026-11-04"
+    },
+    {
+      "en": "If the world takes the right steps, AI will be a force for good and leave everyone better off.",
+      "ko": "세계가 올바른 조치를 취한다면, AI는 선한 힘이 되어 모두의 삶을 더 낫게 만들 것입니다.",
+      "nuance": "take the right steps = 올바른 조치를 취하다. a force for good = 좋은 영향을 끼치는 힘(사람·기술·단체 모두에 씀). leave A better off = A를 (이전보다) 더 나은 처지로 만들어 놓다. better off는 ‘형편·상황이 더 나은’.",
+      "memorization_tip": "leave + 사람 + better off → 지나간 뒤에 사람을 ‘더 나은 상태로 남겨 두다’. 반대는 worse off.",
+      "asked_at": "2026-11-05"
+    },
+    {
+      "en": "When I first learned about computers at age 13 I was fascinated by the idea of making them more intelligent and able to perform things that, at the time, only humans could do.",
+      "ko": "열세 살에 처음 컴퓨터를 접했을 때, 저는 컴퓨터를 더 똑똑하게 만들어 당시엔 인간만 할 수 있던 일을 해내게 한다는 생각에 매료되었습니다.",
+      "nuance": "be fascinated by = ~에 매료되다. making them more intelligent and able to perform … 에서 make + 목적어 + 형용사 두 개(intelligent, able)가 and로 연결됨. at the time은 삽입구로 ‘그 당시에는’.",
+      "memorization_tip": "구조: fascinated by the idea of making them [more intelligent] and [able to perform things that only humans could do].",
+      "asked_at": "2026-11-05"
+    },
+    {
+      "en": "Although I have diversified my portfolio quite a bit, I still have financial ties to it.",
+      "ko": "자산을 꽤 분산하긴 했지만, 여전히 이 산업과 금전적으로 얽혀 있습니다.",
+      "nuance": "diversify one's portfolio = 투자 자산을 여러 곳에 분산하다. quite a bit = 꽤 많이. have financial ties to ~ = ~와 금전적 이해관계가 있다. 이해충돌을 고지하는 전형적인 문장.",
+      "memorization_tip": "ties(끈, 연결) → financial ties = 돈으로 이어진 끈. diverse(다양한) → diversify(다양하게 하다).",
+      "asked_at": "2026-11-05"
+    },
+    {
+      "en": "Of course, readers will have to decide for themselves whether this clouds my view.",
+      "ko": "물론 이것이 제 판단을 흐리는지는 독자 여러분이 직접 판단하셔야겠죠.",
+      "nuance": "decide for themselves = (남이 정해 주지 않고) 스스로 판단하다. cloud는 동사로 ‘(판단·시야를) 흐리게 하다’ — cloud one's judgment/view. 자신의 편향 가능성을 인정하며 독자에게 판단을 넘기는 겸손한 마무리.",
+      "memorization_tip": "cloud(구름)가 시야를 가리듯 → cloud my view = 내 시야를 흐리다.",
+      "asked_at": "2026-11-05"
+    }
+  ]
+}
